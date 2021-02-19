@@ -17,14 +17,8 @@
                 <div class="form-group">
                     <label for="isi">isi</label>
                     <div>
-                        <textarea class="form-control" name="isi" id="isi" rows="4"></textarea>
+                        <textarea id="summernote" name="isi"></textarea>
                     </div>
-                </div>
-                <div class="form-group">
-                  <label>Gambar</label>
-                  <div>
-                      <input type="file" name="gambar" id="gambar" placeholder="ketik" autocomplete="off" class="form-control-file">
-                  </div>
                 </div>
                 <button type="submit" class="btn btn-primary mr-2">Simpan</button>
                 <button type="reset" class="btn btn-danger mr-2">Batal</button>
@@ -99,9 +93,19 @@
     </div>
 </div>
 @endsection
+@section('script')
+    
 <script>
-    $(document).ready(function () {
-        $('#example').DataTable();
+    jQuery(document).ready(function ($) {
+        $('#demo-foo-pagination').DataTable();
     });
 
 </script>
+<script>
+    $('#summernote').summernote({
+      placeholder: 'Isi Keterangan',
+      tabsize: 10,
+      height: 100
+    });
+  </script>
+@endsection

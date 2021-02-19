@@ -40,7 +40,7 @@
             <div class="form-group">
                 <label for="ket">Keterangan</label>
                 <div>
-                    <textarea class="form-control" name="ket" id="ket" rows="4">{{ $r->ket }}</textarea>
+                    <textarea id="summernote" name="ket">{{ $r->ket }}</textarea>
                 </div>
             </div>
             <div class="form-group">

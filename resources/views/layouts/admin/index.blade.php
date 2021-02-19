@@ -10,6 +10,8 @@
 <link href="{{asset('admin/css/plugins.css')}}" rel="stylesheet">
 <!-- Custom CSS -->
 <link href="{{asset('admin/css/style.css')}}" rel="stylesheet">
+{{-- summernote --}}
+<link href="{{asset('/summernote/summernote.min.css')}}" rel="stylesheet">
 <!-- Favicon -->
 <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
 </head>
@@ -62,6 +64,8 @@
     <!--jquery js -->
     <script src="{{asset('admin/js/custom.js')}}"></script>
     <script src="{{asset('admin/js/bootstrap-datepicker.min.js')}}"></script>
+    {{-- summernote --}}
+    <script src="{{asset('/summernote/summernote.min.js')}}"></script>
     @yield('script')
 </body>
 

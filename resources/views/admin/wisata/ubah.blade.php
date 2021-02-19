@@ -38,8 +38,7 @@
             <div class="form-group">
                 <label for="keterangan">Keterangan</label>
                 <div>
-                    {{-- <input type="text" class="form-control" name="keterangan" id="keterangan" placeholder="Keterangan"> --}}
-                    <textarea class="form-control" name="keterangan" id="keterangan" rows="4">{{ $r->ket }}</textarea>
+                    <textarea id="summernote" name="keterangan">{{ $r->ket }}</textarea>
                 </div>
             </div>
             <div class="form-group">
@@ -54,4 +53,15 @@
         </form>
     </div>
 </div>
+@endsection
+@section('script')
+    
+<script>
+    $('#summernote').summernote({
+      placeholder: 'Isi Keterangan',
+      tabsize: 10,
+      height: 100
+    });
+</script>
+
 @endsection

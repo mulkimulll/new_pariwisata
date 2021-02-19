@@ -9,11 +9,11 @@
     </div>
     <ul id="dc_accordion" class="sidebar-menu tree">
         <li> <a href="{{ url('/dashboard') }}" class=""> <i class="ti-home"></i> <span>Dashboard</span></a> </li>
-        <li class="menu_sub"> <a href="#"> <i class="ti-view-grid"></i> <span>Kelola Kategori </span> <span
+        <li class="menu_sub"> <a href="#"> <i class="ti-view-grid"></i> <span>Master Kategori </span> <span
                     class="ti ti-angle-down styleicon"></span> </a>
             <ul class="down_menu">
-                <li> <a href="{{ url('/kategori') }}" class=""><span>Kategori Wisata</span></a> </li>
-                <li> <a href="{{ url('/subkategori') }}">Sub Kategori Wisata</a> </li>
+                <li> <a href="{{ url('/kategori') }}" class=""><span>Kategori</span></a> </li>
+                <li> <a href="{{ url('/subkategori') }}">Sub Kategori</a> </li>
             </ul>
         </li>
         <li> <a href="{{ url('/wisata') }}" class=""> <i class="ti-location-pin"></i> <span>Destinasi Wisata</span></a>

@@ -41,7 +41,7 @@
                 <div class="form-group">
                     <label for="ket">Keterangan</label>
                     <div>
-                        <textarea class="form-control" name="ket" id="ket" rows="4" placeholder="Isi Informasi dan keterangan"></textarea>
+                        <textarea id="summernote" name="ket"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
@@ -108,9 +108,18 @@
     </div>
 </div>
 @endsection
+@section('script')
+    
 <script>
     $(document).ready(function () {
         $('#example').DataTable();
     });
-
+    
+    $('#summernote').summernote({
+      placeholder: 'Isi Keterangan',
+      tabsize: 10,
+      height: 100
+    });
 </script>
+
+@endsection

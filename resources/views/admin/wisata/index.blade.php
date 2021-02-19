@@ -58,8 +58,7 @@
                     <div class="form-group">
                         <label for="keterangan">Keterangan</label>
                         <div>
-                            {{-- <input type="text" class="form-control" name="keterangan" id="keterangan" placeholder="Keterangan"> --}}
-                            <textarea class="form-control" name="keterangan" id="keterangan" rows="4"></textarea>
+                            <textarea id="summernote" name="keterangan"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
@@ -130,6 +129,12 @@
     $(document).ready(function () {
         $('#example').DataTable();
     });
-
+    
+    $('#summernote').summernote({
+      placeholder: 'Isi Keterangan',
+      tabsize: 10,
+      height: 100
+    });
 </script>
+
 @endsection
