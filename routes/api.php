@@ -17,3 +17,26 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('login',[App\Http\Controllers\Api\UserController::class, 'login']);
+Route::post('register', [App\Http\Controllers\Api\UserController::class, 'register']);
+
+Route::group(['middleware' => 'auth:api'], function(){
+
+    Route::get('kategori', [App\Http\Controllers\Api\KategoriController::class, 'index']);
+
+    Route::get('user/detail', [App\Http\Controllers\Api\UserController::class, 'details']);
+    Route::post('logout', [App\Http\Controllers\Api\UserController::class, 'logout']);
+}); 
+
+$api = app('Dingo\Api\Routing\Router');
+$api->version('v1', function($api) {
+    $api->get('test', function() {
+        return 1;
+   });
+   $api->get('kategori', [App\Http\Controllers\Api\KategoriController::class, 'index']);
+   
+   $api->get('subkategori', [App\Http\Controllers\Api\SubkategoriController::class, 'index']);
+
+   $api->get('wisata', [App\Http\Controllers\Api\WisataController::class, 'index']);
+});

@@ -10,15 +10,17 @@ use App\Models\Kategori;
 use DB;
 use Input;
 use Image;
+use Illuminate\Support\Facades\Auth;
+use Validator;
 
 class KategoriController extends Controller
 {
     use Helpers;
+    public $successStatus = 200;
     public function index()
     {
-        $r = DB::select("SELECT * FROM kategori");
-
-        return view('admin.kategori.kategori',compact('r'));
+        $k = DB::select("SELECT * FROM kategori");
+        return response()->json(['success' => $k], $this->successStatus);
     }
 
     public function create(Request $request)
