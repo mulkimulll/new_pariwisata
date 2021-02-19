@@ -40,7 +40,7 @@
                         Telp: {{ $r->telp }} <br>
                         Alamat: {{ $r->alamat }}                    
                     </p>                    
-                    <a href="{{ url('/wisata') }}"><button type="button" class="btn btn-secondary"><i class="ti-back-left mr-2"></i> Kembali</button></a>
+                    <a href="{{ url('/akomodasi') }}"><button type="button" class="btn btn-secondary"><i class="ti-back-left mr-2"></i> Kembali</button></a>
                   </div>
                 </div>
               </div>

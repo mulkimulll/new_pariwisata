@@ -64,7 +64,7 @@
                     <tr>
                         <th> id </th>
                         <th> Judul Informasi </th>
-                        <th> Gambar </th>
+                        {{-- <th> Gambar </th> --}}
                         <th> Tgl.Buat </th>
                         <th> Aksi</th>
                     </tr>
@@ -74,7 +74,7 @@
                     <tr>
                         <td>{{$item->id}}</td>
                         <td>{{$item->judul}}</td>
-                        <td><img src="{{ asset('/images/info/'.$item->gambar) }}" style="height: 50px; width: 50px;" alt=""></td>
+                        {{-- <td><img src="{{ asset('/images/info/'.$item->gambar) }}" style="height: 50px; width: 50px;" alt=""></td> --}}
                         <td>{{$item->created_at}} <br> <small>Oleh: {{ $item->create_user }}</small> </td>
                         <td><a href="{{ url('info-updt/'.$item->id) }}" class="btn btn-sm btn-info"><i
                                     class="fa fa-pen"></i> Ubah</a>

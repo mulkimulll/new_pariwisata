@@ -22,6 +22,6 @@
         </li>
         <li> <a href="{{ url('/info') }}" class=""> <i class="ti-info"></i> <span>Kelola Informasi</span></a> </li>
         <li> <a href="{{ url('/akomodasi') }}" class=""> <i class="ti-bag"></i> <span>Akomodasi</span></a> </li>
-        <li> <a href="{{ url('/event') }}" class=""> <i class="ti-calendar"></i> <span>Event</span></a> </li>
+        {{-- <li> <a href="{{ url('/event') }}" class=""> <i class="ti-calendar"></i> <span>Event</span></a> </li> --}}
     </ul>
 </div>

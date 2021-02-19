@@ -6,11 +6,12 @@
                 <h4>
                     Ubah Subkategori Wisata
                 </h4>
-                <form class="forms-sample" method="POST" action="{{ url('subkategori-ubah/'.$r->idsub) }}">
+                <form class="forms-sample" method="POST" action="{{ url('subkategori-ubah-proses/'.$r->idsub) }}">
                   @csrf
                     <div class="form-group">
                         <label for="idkategori">Kategori</label>
-                        <select class="form-control" id="idkategori" name="idkategori" value="{{ $r->namakat }}">
+                        <select class="form-control" id="idkategori" name="idkategori">
+                            {{-- <option value="{{ $r->idkategori }}" disabled>--{{ $r->namakat }}--</option> --}}
                             @foreach ($k as $item)
                                 <option value="{{ $item->id }}">{{ $item->nama }}</option>
                             @endforeach
@@ -19,7 +20,7 @@
                     <div class="form-group">
                         <label for="nama">Nama Subkategori</label>
                         <div>
-                            <input type="text" class="form-control" name="nama" id="nama" value="{{ $r->namakat }}">
+                            <input type="text" class="form-control" name="nama" id="nama" value="{{ $r->namasub }}">
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary mr-2">Simpan</button>

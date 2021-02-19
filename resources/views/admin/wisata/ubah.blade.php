@@ -22,6 +22,14 @@
                 </select>
             </div>
             <div class="form-group">
+                <label for="subkategori">Subkategori</label>
+                <select class="form-control" id="subkategori" name="subkategori">
+                    @foreach ($sk as $item)
+                        <option value="{{ $item->idsub }}">{{ $item->nama }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
                 <label for="alamat">alamat</label>
                 <div>
                     <input type="text" class="form-control" name="alamat" id="alamat" value="{{ $r->alamat }}">

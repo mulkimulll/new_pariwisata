@@ -8,7 +8,7 @@
               <div class="col-sm-8">
                 <div class="media"><img class="img-thumbnail rounded-circle mr-3" src="{{asset('admin/images/user3.png')}}" style="width: 50px; height: 50px;" alt="Generic placeholder image">
                   <div class="media-body align-self-center">
-                    <h5 class="mt-0 user-name">Transportasi{{ $r->kendaraan }}</h5>
+                    <h5 class="mt-0 user-name">Transportasi {{ $r->kendaraan }}</h5>
                   </div>
                 </div>
               </div>

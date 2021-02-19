@@ -13,12 +13,12 @@
                 <strong>{{ session('message') }}</strong>
             </div>    
             @endif 
-            @if(Session::has('messageerror'))
+            @if(Session::has('messagehapus'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">                            
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
-                <strong>{{ session('messageerror') }}</strong>
+                <strong>{{ session('messagehapus') }}</strong>
             </div>    
             @endif 
             <div class="card">
@@ -98,7 +98,7 @@
                         @foreach ($w as $item)
                         <tr>
                             <td> <a href="{{ url('wisata-dtl/'.$item->id) }}"><strong style="color: blue">{{$item->nama_wisata}}</strong></a></td>
-                            <td>{{$item->nama}}</td>
+                            <td>{{$item->kategori}} <br> <small>Sub: {{ $item->subkategori }}</small></td>
                             <td>{{$item->alamat}}</td>
                             <td><a href="{{ url('wisata-updt/'.$item->id) }}" class="btn btn-sm btn-info"><i
                                         class="fa fa-pen"></i> Ubah</a>

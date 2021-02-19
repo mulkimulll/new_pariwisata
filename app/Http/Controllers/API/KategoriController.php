@@ -1,7 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
+use App\Transformers\MemberTransformer;
+use Dingo\Api\Routing\Helpers;
 use Illuminate\Http\Request;
 use App\Models\Kategori;
 use DB;
@@ -10,6 +13,7 @@ use Image;
 
 class KategoriController extends Controller
 {
+    use Helpers;
     public function index()
     {
         $r = DB::select("SELECT * FROM kategori");

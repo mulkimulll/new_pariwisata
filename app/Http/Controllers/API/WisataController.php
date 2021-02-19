@@ -1,7 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
+use App\Transformers\MemberTransformer;
+use Dingo\Api\Routing\Helpers;
 use Illuminate\Http\Request;
 use App\Models\Wisata;
 use DB;
@@ -10,6 +13,8 @@ use Image;
 
 class WisataController extends Controller
 {
+    use Helpers;
+    
     public function index()
     {
         $r = DB::select("SELECT * FROM kategori");

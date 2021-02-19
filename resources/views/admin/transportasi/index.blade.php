@@ -2,6 +2,22 @@
 @section('content')
 <div class="row">
     <div class="col-md-4">
+        @if(Session::has('message'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">                            
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>{{ session('message') }}</strong>
+        </div>    
+        @endif 
+        @if(Session::has('messagehapus'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">                            
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>{{ session('messagehapus') }}</strong>
+        </div>    
+        @endif 
         <div class="card">
             <h4>
                 Tambah Transportasi
@@ -70,6 +86,7 @@
                     <tr>
                         <th> Kendaraan </th>
                         <th> Tujuan </th>
+                        {{-- <th> Gambar </th> --}}
                         <th> Aksi</th>
                     </tr>
                 </thead>
@@ -78,6 +95,7 @@
                     <tr>
                         <td> <a href="{{ url('trans-dtl/'.$item->id) }}"><strong style="color: blue">{{$item->kendaraan}}</strong></a></td>
                         <td>{{$item->tujuan}}</td>
+                        {{-- <td><img src="{{asset('images/transportasi/'.$item->gambar)}}"></td> --}}
                         <td><a href="{{ url('trans-updt/'.$item->id) }}" class="btn btn-sm btn-info"><i
                                     class="fa fa-pen"></i> Ubah</a>
                             <a href="{{ url('trans-del/'.$item->id) }}" class="btn btn-sm btn-danger"
