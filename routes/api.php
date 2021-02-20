@@ -25,6 +25,9 @@ Route::group(['middleware' => 'auth:api'], function(){
 
     Route::get('kategori', [App\Http\Controllers\Api\KategoriController::class, 'index']);
 
+    Route::get('wisata-kuliner', [App\Http\Controllers\Api\WisataController::class, 'index']);
+    Route::get('wisata-kuliner/{id}', [App\Http\Controllers\Api\WisataController::class, 'dtl']);
+
     Route::get('user/detail', [App\Http\Controllers\Api\UserController::class, 'details']);
     Route::post('logout', [App\Http\Controllers\Api\UserController::class, 'logout']);
 }); 

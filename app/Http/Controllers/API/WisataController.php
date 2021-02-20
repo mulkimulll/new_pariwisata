@@ -10,32 +10,18 @@ use App\Models\Wisata;
 use DB;
 use Input;
 use Image;
+use Illuminate\Support\Facades\Auth;
+use Validator;
 
 class WisataController extends Controller
 {
     use Helpers;
+    public $successStatus = 200;
     
     public function index()
     {
-        $r = DB::select("SELECT * FROM kategori");
-        $sk = DB::select("SELECT * FROM subkategori");
-        $w = DB::select("SELECT 
-        a.id,
-        nama_wisata,
-        b.nama AS kategori,
-        c.nama AS subkategori,
-        alamat,
-        ket,
-        gambar,
-        a.created_at
-    FROM
-        wisata a
-            LEFT JOIN
-        kategori b ON a.kategori = b.id
-            LEFT JOIN
-        subkategori c ON a.idsub = c.idsub");
-
-        return view('admin.wisata.index',compact('r','sk','w'));
+        $w = DB::select("SELECT * FROM wisata where kategori=2");
+        return response()->json(['success' => $w], $this->successStatus);
     }
 
     public function create(Request $request)
@@ -64,9 +50,8 @@ class WisataController extends Controller
 
     public function dtl($id=null)
     {
-        $r = DB::select("SELECT * FROM wisata where id=?",[$id])[0];
-        
-        return view('admin.wisata.dtl',compact('r'));
+        $w = DB::select("SELECT * FROM wisata where id=?",[$id])[0];
+        return response()->json(['success' => $w], $this->successStatus);
     }
 
     public function update($id=null)
