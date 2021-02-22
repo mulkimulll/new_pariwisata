@@ -8,7 +8,7 @@
               <div class="col-sm-8">
                 <div class="media"><img class="img-thumbnail rounded-circle mr-3" src="{{asset('admin/images/user3.png')}}" style="width: 50px; height: 50px;" alt="Generic placeholder image">
                   <div class="media-body align-self-center">
-                    <h5 class="mt-0 user-name">Transportasi {{ $r->kendaraan }}</h5>
+                    <h5 class="mt-0 user-name">Transportasi {{ $r->nama }}</h5>
                   </div>
                 </div>
               </div>
@@ -34,7 +34,28 @@
                 </div> --}}
               </div>
               <div class="col-xl-6">
-                <p>Informasi / Keterangan :<br><br> {{ $r->keterangan }}</p>
+                <table id="demo-foo-pagination" class="table m-b-0 table-bordered toggle-arrow-tiny" data-page-size="5">
+                  <thead>
+                      <tr>
+                          <th> Tarif/Biaya </th>
+                          <th> Trayek</th>
+                          <th> Keberangkatan </th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <td>{{$r->biaya}}</td>
+                          <td>{{$r->trayek}}</td>
+                          <td>{{$r->jam_keberangkatan}}</td>                                                    
+                      </tr>
+                  </tbody>
+              </table>
+                {{-- <p>
+                  Tarif : {{ $r->biaya }} <br>
+                  Trayek : {{ $r->trayek }} <br>
+                  jam keberangkatan : {{ $r->jam_keberangkatan }}
+                  Informasi / Keterangan :<br><br> {{ $r->keterangan }}                
+                </p> --}}
                 <a href="{{ url('/transportasi') }}"><button type="button" class="btn btn-secondary"><i class="ti-back-left mr-2"></i> Kembali</button></a>
               </div>
             </div>

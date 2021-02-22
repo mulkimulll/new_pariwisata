@@ -9,5 +9,5 @@ class Transportasi extends Model
 {
     use HasFactory;
     protected $table = "transportasi";
-    protected $fillable = ['kendaraan','tujuan','keterangan','gambar'];
+    protected $fillable = ['jenis_transportasi','nama','biaya','trayek','jam_keberangkatan','keterangan','gambar'];
 }

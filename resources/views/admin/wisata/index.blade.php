@@ -36,6 +36,7 @@
                     <div class="form-group">
                         <label for="kategori">Kategori</label>
                         <select class="form-control" id="kategori" name="kategori">
+                            <option value="0">-- Pilih Kategori --</option>
                             @foreach ($r as $item)
                                 <option value="{{ $item->id }}">{{ $item->nama }}</option>
                             @endforeach
@@ -44,9 +45,7 @@
                     <div class="form-group">
                         <label for="subkategori">Subkategori</label>
                         <select class="form-control" id="subkategori" name="subkategori">
-                            @foreach ($sk as $item)
-                                <option value="{{ $item->idsub }}">{{ $item->nama }}</option>
-                            @endforeach
+                                <option value="0">Pilih Subkategori</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -134,6 +133,38 @@
       placeholder: 'Isi Keterangan',
       tabsize: 10,
       height: 100
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+       $('#kategori').change(function () {
+         var id = $(this).val();
+
+         $('#subkategori').find('option').not(':first').remove();
+
+         $.ajax({
+            url:'/kategori-dropdown/'+id,
+            type:'get',
+            dataType:'json',
+            success:function (response) {
+                var len = 0;
+                if (response.data != null) {
+                    len = response.data.length;
+                }
+
+                if (len>0) {
+                    for (var i = 0; i<len; i++) {
+                         var idsub = response.data[i].idsub;
+                         var namasub = response.data[i].namasub;
+
+                         var option = "<option value='"+idsub+"'>"+namasub+"</option>"; 
+
+                         $("#subkategori").append(option);
+                    }
+                }
+            }
+         })
+       });
     });
 </script>
 

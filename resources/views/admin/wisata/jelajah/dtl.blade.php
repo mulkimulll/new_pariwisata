@@ -35,7 +35,7 @@
                   </div>
                   <div class="col-xl-6">
                     <p>Informasi / Keterangan :<br><br> {{ $r->ket }}</p>
-                    <a href="{{ url('/wisata') }}"><button type="button" class="btn btn-secondary"><i class="ti-back-left mr-2"></i> Kembali</button></a>
+                    <a href="{{ url('/wisata-jelajah') }}"><button type="button" class="btn btn-secondary"><i class="ti-back-left mr-2"></i> Kembali</button></a>
                   </div>
                 </div>
               </div>

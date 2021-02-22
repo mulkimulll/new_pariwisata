@@ -14,6 +14,7 @@
 <link href="{{asset('/summernote/summernote.min.css')}}" rel="stylesheet">
 <!-- Favicon -->
 <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+@yield('css')
 </head>
 
 <body>

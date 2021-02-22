@@ -1,6 +1,6 @@
 <div class="side_bar scroll_auto">
     <div class="user-panel">
-        <div class="user_image"> <img src="{{asset('logo-contoh-sidebar.jpg')}}" class="img-circle mCS_img_loaded"
+        <div class="user_image"> <img src="{{asset('/img/logo-admin.jpg')}}" class="img-circle mCS_img_loaded"
                 alt=""> </div>
         <div class="info">
             <p> Pariwisata </p>
@@ -9,16 +9,31 @@
     </div>
     <ul id="dc_accordion" class="sidebar-menu tree">
         <li> <a href="{{ url('/dashboard') }}" class=""> <i class="ti-home"></i> <span>Dashboard</span></a> </li>
-        <li class="menu_sub"> <a href="#"> <i class="ti-view-grid"></i> <span>Master Kategori </span> <span
+        <li class="menu_sub"> <a href="#"> <i class="ti-view-grid"></i> <span>Master kategori </span> <span
                     class="ti ti-angle-down styleicon"></span> </a>
             <ul class="down_menu">
                 <li> <a href="{{ url('/kategori') }}" class=""><span>Kategori</span></a> </li>
-                <li> <a href="{{ url('/subkategori') }}">Sub Kategori</a> </li>
+                <li> <a href="{{ url('/subkategori') }}">Sub kategori</a> </li>
             </ul>
         </li>
-        <li> <a href="{{ url('/wisata') }}" class=""> <i class="ti-location-pin"></i> <span>Destinasi Wisata</span></a>
+        {{-- <li> <a href="{{ url('/wisata') }}" class=""> <i class="ti-location-pin"></i> <span>Destinasi Wisata</span></a> --}}
+        <li class="menu_sub"> <a href="#"> <i class="ti-location-pin"></i> <span>Master wisata </span> 
+            <span class="ti ti-angle-down styleicon"></span> </a>
+            <ul class="down_menu">
+                <li> <a href="{{ url('/wisata-jelajah') }}"><span>Wisata jelajah</span></a> </li>
+                <li> <a href="{{ url('/wisata-kuliner') }}">Wisata kuliner</a> </li>
+                <li> <a href="{{ url('/wisata-hiburan') }}">Wisata hiburan</a> </li>
+                <li> <a href="{{ url('/wisata-belanja') }}">Wisata belanja</a> </li>
+            </ul>
         </li>
-        <li> <a href="{{ url('/transportasi') }}" class=""> <i class="ti-car"></i> <span>Kelola Transportasi</span></a>
+        </li>
+        </li>
+        <li class="menu_sub1"> <a href="#"> <i class="ti-car"></i> <span>Kelola Transportasi </span> <span
+                    class="ti ti-angle-down styleicon"></span> </a>
+            <ul class="down_menu">
+                <li> <a href="{{ url('/transportasi') }}" class=""><span>Daftar Transportasi</span></a> </li>
+                <li> <a href="{{ url('/kat-transportasi') }}">Kategori Transportasi</a> </li>
+            </ul>
         </li>
         <li> <a href="{{ url('/info') }}" class=""> <i class="ti-info"></i> <span>Kelola Informasi</span></a> </li>
         <li> <a href="{{ url('/akomodasi') }}" class=""> <i class="ti-bag"></i> <span>Akomodasi</span></a> </li>

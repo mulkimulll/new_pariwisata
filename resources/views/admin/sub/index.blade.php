@@ -71,7 +71,7 @@
                     @foreach ($sk as $item)
                     <tr>
                         {{-- <td>{{$item->id}}</td> --}}
-                        <td>{{$item->nama}}</td>
+                        <td>{{$item->namasub}} <br> <small>{{ $item->nama }}</small></td>
                         <td><a href="{{ url('subkategori-ubah/'.$item->idsub) }}" class="btn btn-sm btn-info"><i
                                     class="fa fa-pen"></i> Ubah</a>
                             <a href="{{ url('subkategori-hapus/'.$item->idsub) }}" class="btn btn-sm btn-danger"

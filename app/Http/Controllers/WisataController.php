@@ -10,10 +10,10 @@ use Image;
 
 class WisataController extends Controller
 {
-    public function index()
+    public function index_jelajah()
     {
         $r = DB::select("SELECT * FROM kategori");
-        $sk = DB::select("SELECT * FROM subkategori");
+        $sk = DB::select("SELECT * FROM subkategori where idkategori=1");
         $w = DB::select("SELECT 
         a.id,
         nama_wisata,
@@ -28,18 +28,18 @@ class WisataController extends Controller
             LEFT JOIN
         kategori b ON a.kategori = b.id
             LEFT JOIN
-        subkategori c ON a.idsub = c.idsub");
+        subkategori c ON a.idsub = c.idsub where kategori = 1");
 
-        return view('admin.wisata.index',compact('r','sk','w'));
+        return view('admin.wisata.jelajah.index',compact('r','sk','w'));
     }
 
-    public function create(Request $request)
+    public function create_jelajah(Request $request)
     {
         if($request->isMethod('post')){
             $data = $request->all();
             $m = new wisata;
             $m->nama_wisata = $data['nama_wisata'];
-            $m->kategori = $data['kategori'];
+            $m->kategori = '1';
             $m->idsub = $data['subkategori'];
             $m->alamat = $data['alamat'];
             $m->ket = $data['keterangan'];
@@ -53,53 +53,68 @@ class WisataController extends Controller
                 $m->gambar = $filename;
                }
             $m->save();
-            return redirect('/wisata')->with('message','Wisata berhasil di simpan');
+            return redirect('/wisata-jelajah')->with('message','Wisata berhasil di simpan');
          }
     }
 
-    public function dtl($id=null)
+    public function getCategory($idkategori)
+    {
+        $data = DB::select("SELECT 
+                    idsub, a.nama AS namasub, b.id as idkategori, b.nama, a.created_at
+                FROM
+                    subkategori a
+                        LEFT JOIN
+                    kategori b ON a.idkategori = b.id where b.id=? ",[$idkategori]);
+        \Log::info($data);
+        return response()->json(['data' => $data]);
+    }
+
+
+    public function dtl_jelajah($id=null)
     {
         $r = DB::select("SELECT * FROM wisata where id=?",[$id])[0];
         
-        return view('admin.wisata.dtl',compact('r'));
+        return view('admin.wisata.jelajah.dtl',compact('r'));
     }
 
-    public function update($id=null)
+    public function update_jelajah($id=null)
     {
         $r = DB::select("SELECT * FROM wisata WHERE id=?",[$id])[0];    
         $w = DB::select("SELECT * FROM kategori");    
-        $sk = DB::select("SELECT * FROM subkategori");    
+        $sk = DB::select("SELECT * FROM subkategori where idkategori=1");    
 
-        return view('admin.wisata.ubah',compact('r','w','sk'));
+        return view('admin.wisata.jelajah.ubah',compact('r','w','sk'));
     }
 
-    public function updateW(Request $request,$id=null)
+    public function update_jelajah_proses(Request $request,$id=null)
     {
         if($request->isMethod('post')){
-            $data = $request->all();
-            if($request->hasFile('gambar')){
-                $file_photo = $request->file('gambar');
+            $update = DB::select("SELECT * FROM wisata where id=?", [$id])[0];
 
-                // Kalo pas diedit gambar diganti / masukin gambar
-                if($file_photo) {
-                    $filename = $file_photo->getClientOriginalName();
-                    $data['gambar'] = $filename; // Update field photo
+            $data = $request->all();
             
-                    $proses = $file_photo->move('images/wisata/', $filename);
-                }
+            if($request->file('gambar') == "")
+            {
+                $update->gambar = $update->gambar;
+            } 
+            else {
+                $file       = $request->file('gambar');
+                $filename   = $file->getClientOriginalName();
+                $request->file('gambar')->move("images/wisata", $filename);
+                $update->gambar = $filename;
             }
-            $filename = $data['gambar']; 
+            $filename = $update->gambar; 
            
             wisata::where(['id'=>$id])->update(['nama_wisata'=>$data['nama_wisata'],
-            'kategori'=>$data['kategori'],'idsub'=>$data['subkategori'],'alamat'=>$data['alamat'],
+            'kategori'=>'1','idsub'=>$data['subkategori'],'alamat'=>$data['alamat'],
             'ket'=>$data['keterangan'],'gambar'=>$filename]);
-            return redirect('/wisata')->with('message','Wisata berhasil di update');
+            return redirect('/wisata-jelajah')->with('message','Wisata berhasil di update');
         }
     }
 
-    public function destroy($id=null){
+    public function destroy_jelajah($id=null){
         $d=DB::delete("DELETE from wisata where id=?",[$id]);
-        return redirect('/wisata')->with('messagehapus','data berhasil di hapus!!!');
+        return redirect('/wisata-jelajah')->with('messagehapus','data berhasil di hapus!!!');
   
     }
 }

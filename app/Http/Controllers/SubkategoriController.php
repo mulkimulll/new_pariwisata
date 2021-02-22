@@ -13,7 +13,12 @@ class SubkategoriController extends Controller
     public function index()
     {
         $r = DB::select("SELECT * FROM kategori");
-        $sk = DB::select("SELECT * FROM subkategori");
+        $sk = DB::select("SELECT 
+                        idsub, a.nama AS namasub, b.id, b.nama, a.created_at
+                    FROM
+                        subkategori a
+                            LEFT JOIN
+                        kategori b ON a.idkategori = b.id");
 
         return view('admin.sub.index',compact('r','sk'));
     }
@@ -55,7 +60,7 @@ class SubkategoriController extends Controller
     }
 
     public function destroy($id=null){
-        $d=DB::delete("DELETE from kategori where id=?",[$id]);
+        $d=DB::delete("DELETE from subkategori where idsub=?",[$id]);
         return redirect('/subkategori')->with('messagehapus','Subkategori berhasil di hapus!!!');
   
     }

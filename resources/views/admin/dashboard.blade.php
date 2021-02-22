@@ -8,7 +8,7 @@
     <div class="col-3 mb-4">
       <div class="card card-shadow">
         <div class="card-body "> <i class="fa fa-map-marker text-primary f30"></i>
-          <h6 class="mb-0 mt-3 text-primary"><a href="{{ route('wisata') }}">Destinasi Wisata</a> </h6>
+          <h6 class="mb-0 mt-3 text-primary"><a href="#">Destinasi Wisata</a> </h6>
           <p class="f12 mb-0">{{ $r->wisata }} Destinasi Baru</p>
         </div>
       </div>
@@ -16,7 +16,7 @@
     <div class="col-3 mb-4">
       <div class="card card-shadow">
         <div class="card-body "> <i class="fa fa-list-alt text-success f30"></i>
-          <h6 class="mb-0 mt-3 text-success"><a href="{{ route('kategori') }}">Kategori</a></h6>
+          <h6 class="mb-0 mt-3 text-success"><a href="#">Kategori</a></h6>
           <p class="f12 mb-0">{{ $r->kategori }} Kategori Baru</p>
         </div>
       </div>
@@ -24,7 +24,7 @@
     <div class="col-3 mb-4">
       <div class="card card-shadow">
         <div class="card-body "> <i class="fa fa-bus text-warning f30"></i>
-          <h6 class="mb-0 mt-3 text-warning"><a href="{{ route('trans') }}">Transportasi</a></h6>
+          <h6 class="mb-0 mt-3 text-warning"><a href="#">Transportasi</a></h6>
           <p class="f12 mb-0">{{ $r->transportasi }} Transportasi Baru</p>
         </div>
       </div>
@@ -32,7 +32,7 @@
     <div class="col-3 mb-4">
       <div class="card card-shadow">
         <div class="card-body "> <i class="icon-calendar text-secondary f30"></i>
-          <h6 class="mb-0 mt-3 text-secondary"><a href="{{ route('event') }}">Event</a></h6>
+          <h6 class="mb-0 mt-3 text-secondary"><a href="#">Event</a></h6>
           <p class="f12 mb-0">{{ $r->event }} Event Baru</p>
         </div>
       </div>

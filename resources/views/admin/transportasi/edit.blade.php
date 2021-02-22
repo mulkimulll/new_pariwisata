@@ -8,27 +8,48 @@
         <form class="forms-sample" method="POST" action="{{ url('/trans-update-proses/'.$r->id) }}" enctype="multipart/form-data" >
           @csrf
             <div class="form-group">
-                    <label for="kendaraan">Kendaraan</label>
+                    <label for="jenis_transportasi">Jenis transportasi</label>
+                    <select class="form-control" id="jenis_transportasi" name="jenis_transportasi">
+                            <option value="{{ $sk->id }}" hidden>{{ $sk->nama }}</option>
+                            @foreach ($t as $item)
+                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                            @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="nama">Nama transportasi</label>
                     <div>
-                        <input type="text" class="form-control" name="kendaraan" id="kendaraan" value="{{ $r->kendaraan }}">
+                        <input type="text" class="form-control" name="nama" id="nama" value="{{ $r->nama }}">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="tujuan">Tujuan</label>
+                    <label for="biaya">Biaya</label>
                     <div>
-                        <input type="text" class="form-control" name="tujuan" id="tujuan" value="{{ $r->tujuan }}">
+                        <input type="text" class="form-control" name="biaya" id="biaya" value="{{ $r->biaya }}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="trayek">Trayek</label>
+                    <div>
+                        <input type="text" class="form-control" name="trayek" id="trayek" value="{{ $r->trayek }}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="jam_keberangkatan">Jam Keberangkatan</label>
+                    <div>
+                        <input type="text" class="form-control" name="jam_keberangkatan" id="jam_keberangkatan" value="{{ $r->jam_keberangkatan }}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="keterangan">Keterangan</label>
                     <div>
-                        <textarea class="form-control" name="keterangan" id="keterangan" rows="4">{{ $r->keterangan }}</textarea>
+                        <textarea id="summernote" name="keterangan">{{ $r->keterangan }}</textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <label>Gambar</label>
                     <div>
-                        <input type="file" name="gambar" id="gambar" placeholder="ketik" autocomplete="off" class="form-control-file">
+                        <input type="file" name="gambar" class="dropify" data-default-file="{{ asset('/images/transportasi/'.$r->gambar) }}" value="{{ $r->gambar }}" />
                     </div>
                   </div>
             <button type="submit" class="btn btn-success mr-2">Simpan</button>
@@ -37,4 +58,27 @@
         </form>
     </div>
 </div>
+@endsection
+
+@section('script')
+<script src="{{asset('vendors/dropify-master/dist/js/dropify.js')}}"></script>
+<script>
+    $('#summernote').summernote({
+        placeholder: 'Isi Keterangan',
+        tabsize: 10,
+        height: 100
+    });    
+
+    $('.dropify').dropify({
+        messages: {
+            'default': 'Drag and drop a file here or click',
+            'replace': 'Drag and drop or click to replace',
+            'remove':  'Remove',
+            'error':   'Ooops, something wrong happended.'
+        }
+    });
+</script>    
+@endsection
+@section('css')
+<link href="{{asset('vendors/dropify-master/dist/css/dropify.css')}}" rel="stylesheet">
 @endsection

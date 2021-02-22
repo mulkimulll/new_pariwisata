@@ -5,21 +5,13 @@
         <h4>
             Ubah Destinasi Wisata
         </h4>
-        <form class="forms-sample" method="POST" action="{{ url('/wisata-update-proses/'.$r->id) }}" enctype="multipart/form-data" >
+        <form class="forms-sample" method="POST" action="{{ url('/wisata-jelajah-update-proses/'.$r->id) }}" enctype="multipart/form-data" >
           @csrf
             <div class="form-group">
                 <label for="nama">Nama</label>
                 <div>
                     <input type="text" class="form-control" name="nama_wisata" id="nama_wisata" value="{{ $r->nama_wisata }}">
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="kategori">Kategori</label>
-                <select class="form-control" id="kategori" name="kategori" value="{{ $r->kategori }}">
-                    @foreach ($w as $item)
-                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
-                    @endforeach
-                </select>
             </div>
             <div class="form-group">
                 <label for="subkategori">Subkategori</label>
@@ -44,24 +36,36 @@
             <div class="form-group">
                 <label>Gambar</label>
                 <div>
-                    <input type="file" name="gambar" id="gambar" placeholder="ketik" autocomplete="off" class="form-control-file">
+                    <input type="file" name="gambar" class="dropify" data-default-file="{{ asset('/images/wisata/'.$r->gambar) }}" value="{{ $r->gambar }}" />
                 </div>
               </div>
             <button type="submit" class="btn btn-success mr-2">Simpan</button>
             <button type="reset" class="btn btn-danger mr-2">Batal</button>
-            <a href="{{ url('/wisata') }}" class="btn btn-primary"><i class="fa fa-reply"></i> Kembali</a>
+            <a href="{{ url('/wisata-jelajah') }}" class="btn btn-primary"><i class="fa fa-reply"></i> Kembali</a>
         </form>
     </div>
 </div>
 @endsection
+
 @section('script')
-    
+<script src="{{asset('vendors/dropify-master/dist/js/dropify.js')}}"></script>
 <script>
     $('#summernote').summernote({
-      placeholder: 'Isi Keterangan',
-      tabsize: 10,
-      height: 100
-    });
-</script>
+        placeholder: 'Isi Keterangan',
+        tabsize: 10,
+        height: 100
+    });    
 
+    $('.dropify').dropify({
+        messages: {
+            'default': 'Drag and drop a file here or click',
+            'replace': 'Drag and drop or click to replace',
+            'remove':  'Remove',
+            'error':   'Ooops, something wrong happended.'
+        }
+    });
+</script>    
+@endsection
+@section('css')
+<link href="{{asset('vendors/dropify-master/dist/css/dropify.css')}}" rel="stylesheet">
 @endsection

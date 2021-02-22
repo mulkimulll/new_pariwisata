@@ -13,8 +13,9 @@ class TransportasiController extends Controller
     public function index()
     {
         $r = DB::select("SELECT * FROM transportasi");
+        $t = DB::select("SELECT * FROM jenis_transportasi");
 
-        return view('admin.transportasi.index',compact('r'));
+        return view('admin.transportasi.index',compact('r','t'));
     }
 
     public function dtl($id=null)
@@ -29,8 +30,11 @@ class TransportasiController extends Controller
         if($request->isMethod('post')){
             $data = $request->all();
             $m = new transportasi;
-            $m->kendaraan = $data['kendaraan'];
-            $m->tujuan = $data['tujuan'];
+            $m->jenis_transportasi = $data['jenis_transportasi'];
+            $m->nama = $data['nama'];
+            $m->biaya = $data['biaya'];
+            $m->trayek = $data['trayek'];
+            $m->jam_keberangkatan = $data['jam_keberangkatan'];
             $m->keterangan = $data['keterangan'];
             if($request->hasfile('gambar')){
                 $files = $request->file('gambar');
@@ -49,31 +53,33 @@ class TransportasiController extends Controller
     public function update($id=null)
     {
         $r = DB::select("SELECT * FROM transportasi WHERE id=?",[$id])[0];    
-        $w = DB::select("SELECT * FROM kategori");    
-        $sk = DB::select("SELECT * FROM subkategori");    
+        $t = DB::select("SELECT * FROM jenis_transportasi");    
+        $sk = DB::select("SELECT * FROM transportasi a left join jenis_transportasi b on a.jenis_transportasi=b.id where a.id=?",[$id])[0];    
 
-        return view('admin.transportasi.edit',compact('r','w','sk'));
+        return view('admin.transportasi.edit',compact('r','t','sk'));
     }
 
     public function updateT(Request $request,$id=null)
     {
         if($request->isMethod('post')){
-            $data = $request->all();
-            if($request->hasFile('gambar')){
-                $file_photo = $request->file('gambar');
+            $update = DB::select("SELECT * FROM transportasi where id=?", [$id])[0];
 
-                // Kalo pas diedit gambar diganti / masukin gambar
-                if($file_photo) {
-                    $filename = $file_photo->getClientOriginalName();
-                    $data['gambar'] = $filename; // Update field photo
+            $data = $request->all();
             
-                    $proses = $file_photo->move('images/transportasi/', $filename);
-                }
+            if($request->file('gambar') == "")
+            {
+                $update->gambar = $update->gambar;
+            } 
+            else {
+                $file       = $request->file('gambar');
+                $filename   = $file->getClientOriginalName();
+                $request->file('gambar')->move("images/transportasi", $filename);
+                $update->gambar = $filename;
             }
-            $filename = $data['gambar']; 
+            $filename = $update->gambar; 
            
-            transportasi::where(['id'=>$id])->update(['kendaraan'=>$data['kendaraan'],
-            'tujuan'=>$data['tujuan'],'keterangan'=>$data['keterangan'],'gambar'=>$filename]);
+            transportasi::where(['id'=>$id])->update(['jenis_transportasi'=>$data['jenis_transportasi'],
+            'nama'=>$data['nama'],'biaya'=>$data['biaya'],'trayek'=>$data['trayek'],'jam_keberangkatan'=>$data['jam_keberangkatan'],'keterangan'=>$data['keterangan'],'gambar'=>$filename]);
             return redirect('/transportasi')->with('message','data berhasil di update');
         }
     }

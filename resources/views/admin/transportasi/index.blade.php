@@ -25,27 +25,47 @@
             <form class="forms-sample" method="POST" action="{{ route('createT') }}" enctype="multipart/form-data">
               @csrf
                 <div class="form-group">
-                    <label for="kendaraan">Kendaraan</label>
+                    <label for="jenis_transportasi">Jenis transportasi</label>
+                    <select class="form-control" id="jenis_transportasi" name="jenis_transportasi">
+                            @foreach ($t as $item)
+                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                            @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="nama">Nama transportasi</label>
                     <div>
-                        <input type="text" class="form-control" name="kendaraan" id="kendaraan" placeholder="Kendaraan">
+                        <input type="text" class="form-control" name="nama" id="nama" placeholder="nama">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="tujuan">Tujuan</label>
+                    <label for="biaya">Biaya</label>
                     <div>
-                        <input type="text" class="form-control" name="tujuan" id="tujuan" placeholder="Tujuan">
+                        <input type="text" class="form-control" name="biaya" id="biaya" placeholder="Rp.">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="trayek">Trayek</label>
+                    <div>
+                        <input type="text" class="form-control" name="trayek" id="trayek" placeholder="Taman Pajajaran – Bantar Kemang – Terminal Merdeka">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="jam_keberangkatan">Jam Keberangkatan</label>
+                    <div>
+                        <input type="text" class="form-control" name="jam_keberangkatan" id="jam_keberangkatan" placeholder="06:00; 07:00">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="keterangan">Keterangan</label>
                     <div>
-                        <textarea class="form-control" name="keterangan" id="keterangan" rows="4"></textarea>
+                        <textarea id="summernote" name="keterangan"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <label>Gambar</label>
                     <div>
-                        <input type="file" name="gambar" id="gambar" placeholder="ketik" autocomplete="off" class="form-control-file">
+                        <input type="file" name="gambar" class="dropify" data-allowed-file-extensions="jpg png" />
                     </div>
                   </div>
                 <button type="submit" class="btn btn-primary mr-2">Simpan</button>
@@ -54,22 +74,6 @@
         </div>
     </div>
     <div class="col-md-8">
-        @if(Session::has('message'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">                            
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-                <strong>{{ session('message') }}</strong>
-            </div>    
-            @endif 
-            @if(Session::has('messageehapus'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">                            
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-                <strong>{{ session('messageehapus') }}</strong>
-            </div>    
-            @endif 
         <div class="card">
             <h4 class="m-t-0 header-title">Daftar Transportasi</h4>
             {{-- <p class="text-muted m-b-30 font-13"> Include pagination in your FooTable. </p> --}}
@@ -84,8 +88,9 @@
             <table id="demo-foo-pagination" class="table m-b-0 table-bordered toggle-arrow-tiny" data-page-size="5">
                 <thead>
                     <tr>
-                        <th> Kendaraan </th>
-                        <th> Tujuan </th>
+                        <th> Nama Transportasi </th>
+                        <th> Biaya </th>
+                        <th> Trayek</th>
                         {{-- <th> Gambar </th> --}}
                         <th> Aksi</th>
                     </tr>
@@ -93,8 +98,9 @@
                 <tbody>
                     @foreach ($r as $item)
                     <tr>
-                        <td> <a href="{{ url('trans-dtl/'.$item->id) }}"><strong style="color: blue">{{$item->kendaraan}}</strong></a></td>
-                        <td>{{$item->tujuan}}</td>
+                        <td> <a href="{{ url('trans-dtl/'.$item->id) }}"><strong style="color: blue">{{$item->nama}}</strong></a></td>
+                        <td>{{$item->biaya}}</td>
+                        <td>{{$item->trayek}}</td>
                         {{-- <td><img src="{{asset('images/transportasi/'.$item->gambar)}}"></td> --}}
                         <td><a href="{{ url('trans-updt/'.$item->id) }}" class="btn btn-sm btn-info"><i
                                     class="fa fa-pen"></i> Ubah</a>
@@ -119,9 +125,30 @@
     </div>
 </div>
 @endsection
+@section('script')
+<script src="{{asset('vendors/dropify-master/dist/js/dropify.js')}}"></script>
 <script>
     $(document).ready(function () {
         $('#example').DataTable();
     });
 
+    $('#summernote').summernote({
+      placeholder: 'Isi Keterangan',
+      tabsize: 10,
+      height: 100
+    });
+   
+    $('.dropify').dropify({
+        messages: {
+            'default': 'Drag and drop a file here or click',
+            'replace': 'Drag and drop or click to replace',
+            'remove':  'Remove',
+            'error':   'Ooops, something wrong happended.'
+        }
+    });
+
 </script>
+@endsection
+@section('css')
+<link href="{{asset('vendors/dropify-master/dist/css/dropify.css')}}" rel="stylesheet">
+@endsection
