@@ -2,6 +2,22 @@
 @section('content')
 <div class="row">
     <div class="col-md-4">
+        @if(Session::has('message'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">                            
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>{{ session('message') }}</strong>
+        </div>    
+        @endif 
+        @if(Session::has('messagehapus'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">                            
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>{{ session('messagehapus') }}</strong>
+        </div>    
+        @endif 
         <div class="card">
             <h4>
                 Tambah Akomodasi
@@ -47,7 +63,7 @@
                 <div class="form-group">
                   <label>Gambar</label>
                   <div>
-                      <input type="file" name="gambar" id="gambar" placeholder="ketik" autocomplete="off" class="form-control-file">
+                    <input type="file" name="gambar" class="dropify" data-allowed-file-extensions="jpg png" />
                   </div>
                 </div>
                 <button type="submit" class="btn btn-primary mr-2">Simpan</button>
@@ -109,7 +125,7 @@
 </div>
 @endsection
 @section('script')
-    
+<script src="{{asset('vendors/dropify-master/dist/js/dropify.js')}}"></script>
 <script>
     $(document).ready(function () {
         $('#example').DataTable();
@@ -120,6 +136,17 @@
       tabsize: 10,
       height: 100
     });
+    
+    $('.dropify').dropify({
+        messages: {
+            'default': 'Drag and drop a file here or click',
+            'replace': 'Drag and drop or click to replace',
+            'remove':  'Remove',
+            'error':   'Ooops, something wrong happended.'
+        }
+    });
 </script>
-
+@endsection
+@section('css')
+<link href="{{asset('vendors/dropify-master/dist/css/dropify.css')}}" rel="stylesheet">
 @endsection

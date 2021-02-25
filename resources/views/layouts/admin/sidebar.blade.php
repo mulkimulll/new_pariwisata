@@ -8,6 +8,7 @@
         </div>
     </div>
     <ul id="dc_accordion" class="sidebar-menu tree">
+        @role('admin')
         <li> <a href="{{ url('/dashboard') }}" class=""> <i class="ti-home"></i> <span>Dashboard</span></a> </li>
         <li class="menu_sub"> <a href="#"> <i class="ti-view-grid"></i> <span>Master kategori </span> <span
                     class="ti ti-angle-down styleicon"></span> </a>
@@ -16,7 +17,6 @@
                 <li> <a href="{{ url('/subkategori') }}">Sub kategori</a> </li>
             </ul>
         </li>
-        {{-- <li> <a href="{{ url('/wisata') }}" class=""> <i class="ti-location-pin"></i> <span>Destinasi Wisata</span></a> --}}
         <li class="menu_sub"> <a href="#"> <i class="ti-location-pin"></i> <span>Master wisata </span> 
             <span class="ti ti-angle-down styleicon"></span> </a>
             <ul class="down_menu">
@@ -26,10 +26,8 @@
                 <li> <a href="{{ url('/wisata-belanja') }}">Wisata belanja</a> </li>
             </ul>
         </li>
-        </li>
-        </li>
         <li class="menu_sub1"> <a href="#"> <i class="ti-car"></i> <span>Kelola Transportasi </span> <span
-                    class="ti ti-angle-down styleicon"></span> </a>
+            class="ti ti-angle-down styleicon"></span> </a>
             <ul class="down_menu">
                 <li> <a href="{{ url('/transportasi') }}" class=""><span>Daftar Transportasi</span></a> </li>
                 <li> <a href="{{ url('/kat-transportasi') }}">Kategori Transportasi</a> </li>
@@ -37,6 +35,21 @@
         </li>
         <li> <a href="{{ url('/info') }}" class=""> <i class="ti-info"></i> <span>Kelola Informasi</span></a> </li>
         <li> <a href="{{ url('/akomodasi') }}" class=""> <i class="ti-bag"></i> <span>Akomodasi</span></a> </li>
-        {{-- <li> <a href="{{ url('/event') }}" class=""> <i class="ti-calendar"></i> <span>Event</span></a> </li> --}}
+        <li> <a href="{{ url('/event') }}" class=""> <i class="ti-calendar"></i> <span>Event</span></a> </li>
+        @endrole
+        @role('partner1')
+        <li> <a href="{{ url('/wisata-jelajah') }}"><span>Wisata jelajah</span></a> </li>
+        @endrole
+        @role('partner2')
+        <li> <a href="{{ url('/wisata-kuliner') }}">Wisata kuliner</a> </li>
+        @endrole
+        @role('partner3')
+        <li> <a href="{{ url('/wisata-hiburan') }}">Wisata hiburan</a> </li>
+        @endrole
+        @role('partner4')
+        <li> <a href="{{ url('/wisata-belanja') }}">Wisata belanja</a> </li>
+        @endrole
+
+        
     </ul>
 </div>

@@ -39,21 +39,35 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/kat-transportasi', [App\Http\Controllers\JenistransportasiController::class, 'index'])->name('kat-trans');
     Route::post('/create-kategori-transportasi', [App\Http\Controllers\JenistransportasiController::class, 'create'])->name('createjenis');
 
-    // Route::get('/wisata', [App\Http\Controllers\WisataController::class, 'index'])->name('wisata');
-    // Route::get('/wisata-dtl/{id}', [App\Http\Controllers\WisataController::class, 'dtl']);
-    // Route::get('/wisata-updt/{id}', [App\Http\Controllers\WisataController::class, 'update']);
-    // Route::get('wisata-del/{id}', [App\Http\Controllers\WisataController::class, 'destroy']);
-    // Route::match(['get','post'],'/wisata-update-proses/{id}', [App\Http\Controllers\WisataController::class, 'updateW'])->name('updateW');
-    // Route::post('/create-wisata', [App\Http\Controllers\WisataController::class, 'create'])->name('createW');
-    Route::get('/kategori-dropdown/{id}', [App\Http\Controllers\WisataController::class, 'getCategory'])->name('getkategori');
+    // Route::get('/kategori-dropdown/{id}', [App\Http\Controllers\WisataController::class, 'getCategory'])->name('getkategori');
 
     Route::get('/wisata-jelajah', [App\Http\Controllers\WisataController::class, 'index_jelajah'])->name('wisata-jelajah');
     Route::post('/create-wisata-jelajah', [App\Http\Controllers\WisataController::class, 'create_jelajah'])->name('create_jelajah');
     Route::get('/wisata-jelajah-dtl/{id}', [App\Http\Controllers\WisataController::class, 'dtl_jelajah']);
     Route::get('/wisata-jelajah-updt/{id}', [App\Http\Controllers\WisataController::class, 'update_jelajah']);
     Route::match(['get','post'],'/wisata-jelajah-update-proses/{id}', [App\Http\Controllers\WisataController::class, 'update_jelajah_proses'])->name('update_jelajah_proses');
-    Route::get('wisata-del/{id}', [App\Http\Controllers\WisataController::class, 'destroy_jelajah']);
+    Route::get('wisata-jelajah-del/{id}', [App\Http\Controllers\WisataController::class, 'destroy_jelajah']);
 
+    Route::get('/wisata-kuliner', [App\Http\Controllers\WisataController::class, 'index_kuliner'])->name('wisata-kuliner');
+    Route::post('/create-wisata-kuliner', [App\Http\Controllers\WisataController::class, 'create_kuliner'])->name('create_kuliner');
+    Route::get('/wisata-kuliner-dtl/{id}', [App\Http\Controllers\WisataController::class, 'dtl_kuliner']);
+    Route::get('/wisata-kuliner-updt/{id}', [App\Http\Controllers\WisataController::class, 'update_kuliner']);
+    Route::match(['get','post'],'/wisata-kuliner-update-proses/{id}', [App\Http\Controllers\WisataController::class, 'update_kuliner_proses'])->name('update_kuliner_proses');
+    Route::get('wisata-kuliner-del/{id}', [App\Http\Controllers\WisataController::class, 'destroy_kuliner']);
+
+    Route::get('/wisata-hiburan', [App\Http\Controllers\WisataController::class, 'index_hiburan'])->name('wisata-hiburan');
+    Route::post('/create-wisata-hiburan', [App\Http\Controllers\WisataController::class, 'create_hiburan'])->name('create_hiburan');
+    Route::get('/wisata-hiburan-dtl/{id}', [App\Http\Controllers\WisataController::class, 'dtl_hiburan']);
+    Route::get('/wisata-hiburan-updt/{id}', [App\Http\Controllers\WisataController::class, 'update_hiburan']);
+    Route::match(['get','post'],'/wisata-hiburan-update-proses/{id}', [App\Http\Controllers\WisataController::class, 'update_hiburan_proses'])->name('update_hiburan_proses');
+    Route::get('wisata-hiburan-del/{id}', [App\Http\Controllers\WisataController::class, 'destroy_hiburan']);
+    
+    Route::get('/wisata-belanja', [App\Http\Controllers\WisataController::class, 'index_belanja'])->name('wisata-belanja');
+    Route::post('/create-wisata-belanja', [App\Http\Controllers\WisataController::class, 'create_belanja'])->name('create_belanja');
+    Route::get('/wisata-belanja-dtl/{id}', [App\Http\Controllers\WisataController::class, 'dtl_belanja']);
+    Route::get('/wisata-belanja-updt/{id}', [App\Http\Controllers\WisataController::class, 'update_belanja']);
+    Route::match(['get','post'],'/wisata-belanja-update-proses/{id}', [App\Http\Controllers\WisataController::class, 'update_belanja_proses'])->name('update_belanja_proses');
+    Route::get('wisata-belanja-del/{id}', [App\Http\Controllers\WisataController::class, 'destroy_belanja']);
 
     Route::get('/transportasi', [App\Http\Controllers\TransportasiController::class, 'index'])->name('trans');
     Route::get('/trans-dtl/{id}', [App\Http\Controllers\TransportasiController::class, 'dtl']);
@@ -82,6 +96,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/event-del/{id}', [App\Http\Controllers\EventController::class, 'destroy']);
     // Route::post('/akomodasi-update-proses/{id}', [App\Http\Controllers\AkomodasiController::class, 'updateproses']);
     Route::post('/create-event', [App\Http\Controllers\EventController::class, 'create'])->name('createE');
+    Route::get('/event-ayo', [App\Http\Controllers\EventController::class, 'index_user']);
 
     Route::get("auto-complete",  [App\Http\Controllers\GoogleController::class, 'index']);
 });

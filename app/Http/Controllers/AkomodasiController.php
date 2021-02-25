@@ -63,19 +63,21 @@ class AkomodasiController extends Controller
     public function updateproses(Request $request,$id=null)
     {
         if($request->isMethod('post')){
-            $data = $request->all();
-            if($request->hasFile('gambar')){
-                $file_photo = $request->file('gambar');
+            $update = DB::select("SELECT * FROM akomodasi where id=?", [$id])[0];
 
-                // Kalo pas diedit gambar diganti / masukin gambar
-                if($file_photo) {
-                    $filename = $file_photo->getClientOriginalName();
-                    $data['gambar'] = $filename; // Update field photo
+            $data = $request->all();
             
-                    $proses = $file_photo->move('images/akomodasi/', $filename);
-                }
+            if($request->file('gambar') == "")
+            {
+                $update->gambar = $update->gambar;
+            } 
+            else {
+                $file       = $request->file('gambar');
+                $filename   = $file->getClientOriginalName();
+                $request->file('gambar')->move("images/akomodasi", $filename);
+                $update->gambar = $filename;
             }
-            $filename = $data['gambar']; 
+            $filename = $update->gambar; 
            
             akomodasi::where(['id'=>$id])->update(['nama'=>$data['nama'],
             'alamat'=>$data['alamat'],'telp'=>$data['telp'],'bintang_hotel'=>$data['bintang_hotel'],

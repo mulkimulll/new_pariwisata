@@ -52,7 +52,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="alamat">alamat</label>
+                        <label for="alamat">Alamat</label>
                         <div>
                             <input type="text" class="form-control" name="alamat" id="alamat" placeholder="Alamat">
                         </div>

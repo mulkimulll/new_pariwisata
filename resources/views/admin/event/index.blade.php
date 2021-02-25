@@ -2,9 +2,25 @@
 @section('content')
 <div class="row">
     <div class="col-md-4">
+        @if(Session::has('message'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">                            
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>{{ session('message') }}</strong>
+        </div>    
+        @endif 
+        @if(Session::has('messagehapus'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">                            
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>{{ session('messagehapus') }}</strong>
+        </div>    
+        @endif 
         <div class="card">
             <h4>
-                Tambah Informasi
+                Tambah Event
             </h4>
             <form class="forms-sample" method="POST" action="{{ route('createE') }}" enctype="multipart/form-data">
               @csrf
@@ -15,18 +31,27 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="isi">isi</label>
+                    <label>Tgl Mulai Event</label>
                     <div>
-                        <textarea class="form-control" name="isi" id="isi" rows="4"></textarea>
+                        <div class="input-group">
+                            <input type="text" name="tgl_mulai" class="form-control datepicker" placeholder="mm/dd/yyyy" id="datepicker-autoclose">
+                            <div class="input-group-append"> <span class="input-group-text"><i class="mdi mdi-calendar"></i></span> </div>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Tgl Event</label>
+                    <label>Tgl Selesai Event</label>
                     <div>
                         <div class="input-group">
-                            <input type="text" name="tgl_event" class="form-control datepicker" placeholder="mm/dd/yyyy" id="datepicker-autoclose">
-                        <div class="input-group-append"> <span class="input-group-text"><i class="mdi mdi-calendar"></i></span> </div>
+                            <input type="text" name="tgl_selesai" class="form-control datepicker" placeholder="mm/dd/yyyy" id="datepicker-autoclose">
+                            <div class="input-group-append"> <span class="input-group-text"><i class="mdi mdi-calendar"></i></span> </div>
                         </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="isi">isi</label>
+                    <div>
+                        <textarea id="summernote" name="isi"></textarea>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary mr-2">Simpan</button>
@@ -62,7 +87,7 @@
                         <td>{{$item->id}}</td>
                         <td>{{$item->nama}}</td>
                         <td>{{$item->isi}}</td>
-                        <td>{{$item->tgl_event}} <br> <small>Oleh: {{ $item->create_user }}</small> </td>
+                        <td>{{$item->tgl_mulai}} <br> <small>Oleh: {{ $item->create_user }}</small> </td>
                         <td>
                             <a href="{{ url('event-del/'.$item->id) }}" class="btn btn-sm btn-danger"
                                 onclick="return confirm('apakah anda yakin?')"><i class="fa fa-trash"></i> Hapus</a>
@@ -90,13 +115,19 @@
 <script>
     jQuery(document).ready(function($) {
         $('.datepicker').datepicker({
-            dateFormat: "Y-m-d H:i:s",
+            dateFormat: "yy-mm-dd",
             autoclose: true,
         });        
         
     });
     $(document).ready(function () {
         $('#example').DataTable();
+    });
+
+    $('#summernote').summernote({
+      placeholder: 'Isi Keterangan',
+      tabsize: 10,
+      height: 100
     });
 </script>
 @endsection

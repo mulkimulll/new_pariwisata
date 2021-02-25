@@ -46,7 +46,7 @@
             <div class="form-group">
             <label>Gambar</label>
             <div>
-                <input type="file" name="gambar" id="gambar" autocomplete="off" class="form-control-file">
+                <input type="file" name="gambar" class="dropify" data-default-file="{{ asset('/images/akomodasi/'.$r->gambar) }}" value="{{ $r->gambar }}" />
             </div>
             </div>
             <button type="submit" class="btn btn-success mr-2">Simpan</button>
@@ -55,4 +55,26 @@
         </form>
     </div>
 </div>
+@endsection
+@section('script')
+<script src="{{asset('vendors/dropify-master/dist/js/dropify.js')}}"></script>
+<script>
+    $('#summernote').summernote({
+        placeholder: 'Isi Keterangan',
+        tabsize: 10,
+        height: 100
+    });    
+
+    $('.dropify').dropify({
+        messages: {
+            'default': 'Drag and drop a file here or click',
+            'replace': 'Drag and drop or click to replace',
+            'remove':  'Remove',
+            'error':   'Ooops, something wrong happended.'
+        }
+    });
+</script>    
+@endsection
+@section('css')
+<link href="{{asset('vendors/dropify-master/dist/css/dropify.css')}}" rel="stylesheet">
 @endsection

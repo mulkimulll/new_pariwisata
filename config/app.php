@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
+        jeremykenedy\LaravelRoles\RolesServiceProvider::class,
 
 
     ],
