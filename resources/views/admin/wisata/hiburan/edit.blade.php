@@ -3,7 +3,7 @@
 <div class="col-md-4">
     <div class="card">
         <h4>
-            Ubah Destinasi Wisata
+            Ubah Destinasi Wisata Hiburan
         </h4>
         <form class="forms-sample" method="POST" action="{{ url('/wisata-hiburan-update-proses/'.$r->id) }}" enctype="multipart/form-data" >
           @csrf

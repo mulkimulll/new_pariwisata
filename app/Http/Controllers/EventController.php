@@ -18,7 +18,7 @@ class EventController extends Controller
 
         return view('admin.event.index',compact('r'));
     }
-    public function index_user()
+    public function index_event()
     {
         $r = DB::select("SELECT * FROM event");
 

@@ -2,17 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -68,6 +57,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/wisata-belanja-updt/{id}', [App\Http\Controllers\WisataController::class, 'update_belanja']);
     Route::match(['get','post'],'/wisata-belanja-update-proses/{id}', [App\Http\Controllers\WisataController::class, 'update_belanja_proses'])->name('update_belanja_proses');
     Route::get('wisata-belanja-del/{id}', [App\Http\Controllers\WisataController::class, 'destroy_belanja']);
+    
+    Route::get('/budaya', [App\Http\Controllers\BudayaController::class, 'index'])->name('budaya');
+    Route::post('/create-budaya', [App\Http\Controllers\BudayaController::class, 'create'])->name('create');
+    Route::get('/budaya-dtl/{id}', [App\Http\Controllers\BudayaController::class, 'dtl']);
+    Route::get('/budaya-updt/{id}', [App\Http\Controllers\BudayaController::class, 'update']);
+    Route::match(['get','post'],'/budaya-update-proses/{id}', [App\Http\Controllers\BudayaController::class, 'update_proses'])->name('update_proses');
+    Route::get('budaya-del/{id}', [App\Http\Controllers\BudayaController::class, 'destroy']);
 
     Route::get('/transportasi', [App\Http\Controllers\TransportasiController::class, 'index'])->name('trans');
     Route::get('/trans-dtl/{id}', [App\Http\Controllers\TransportasiController::class, 'dtl']);
@@ -96,11 +92,29 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/event-del/{id}', [App\Http\Controllers\EventController::class, 'destroy']);
     // Route::post('/akomodasi-update-proses/{id}', [App\Http\Controllers\AkomodasiController::class, 'updateproses']);
     Route::post('/create-event', [App\Http\Controllers\EventController::class, 'create'])->name('createE');
-    Route::get('/event-ayo', [App\Http\Controllers\EventController::class, 'index_user']);
+    // Route::get('/event-ayo', [App\Http\Controllers\EventController::class, 'index_user']);
 
     Route::get("auto-complete",  [App\Http\Controllers\GoogleController::class, 'index']);
+
+    Route::get('/akun', [App\Http\Controllers\AkunController::class, 'index'])->name('akun');
 });
 
-Auth::routes();
+// frontend
+Route::get('/bogor-jelajah', [App\Http\Controllers\WisatabogorController::class, 'index'])->name('bogor-jelajah');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/bogor-kuliner', [App\Http\Controllers\WisatabogorController::class, 'index_kuliner'])->name('bogor-kuliner');
+Route::get('/bogor-kuliner/{id}', [App\Http\Controllers\WisatabogorController::class, 'dtl_kuliner']);
+
+Route::get('/bogor-belanja', [App\Http\Controllers\WisatabogorController::class, 'index_belanja'])->name('bogor-belanja');
+Route::get('/bogor-belanja/{id}', [App\Http\Controllers\WisatabogorController::class, 'dtl_belanja']);
+
+Route::get('/bogor-pendakian', [App\Http\Controllers\WisatabogorController::class, 'index_pendakian'])->name('bogor-pendakian');
+Route::get('/bogor-pendakian/{id}', [App\Http\Controllers\WisatabogorController::class, 'dtl_pendakian']);
+Route::get('/boking-pendakian/{id}', [App\Http\Controllers\WisatabogorController::class, 'booking_pendakian']);
+
+Route::get('/bogor-event', [App\Http\Controllers\EventController::class, 'index_event'])->name('bogor-event');
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/cekboking', [App\Http\Controllers\WisatabogorController::class, 'boking_jelajah'])->name('cekboking');
+    
+});

@@ -24,18 +24,39 @@ Route::post('register', [App\Http\Controllers\ApiMobile\UserController::class, '
     Route::get('subkategori-jelajah', [App\Http\Controllers\ApiMobile\SubkategoriController::class, 'subkategori_jelajah']);
     Route::get('subkategori-hiburan', [App\Http\Controllers\ApiMobile\SubkategoriController::class, 'subkategori_hiburan']);
 
-    Route::get('wisata-kuliner', [App\Http\Controllers\ApiMobile\WisataController::class, 'index']);
-    Route::get('wisata-kuliner/{id}', [App\Http\Controllers\ApiMobile\WisataController::class, 'dtl']);
-
     Route::get('wisata-jelajah', [App\Http\Controllers\ApiMobile\WisataController::class, 'index_jelajah']);
-    Route::get('wisata-jelajah/{id}', [App\Http\Controllers\ApiMobile\WisataController::class, 'dtl_jelajah']);
-    
+    // kategori jelajah
+    Route::get('wisata-pendakian', [App\Http\Controllers\ApiMobile\WisataController::class, 'index_pendakian']);
+    Route::get('wisata-hutan', [App\Http\Controllers\ApiMobile\WisataController::class, 'index_hutan']);
+    Route::get('wisata-pantai', [App\Http\Controllers\ApiMobile\WisataController::class, 'index_pantai']);
+    Route::get('wisata-lembah', [App\Http\Controllers\ApiMobile\WisataController::class, 'index_lembah']);
+    // detail wisata jelajah
+    Route::get('wisata-pendakian/{id}', [App\Http\Controllers\ApiMobile\WisataController::class, 'dtl_pendakian']);
+    Route::get('wisata-hutan/{id}', [App\Http\Controllers\ApiMobile\WisataController::class, 'dtl_hutan']);
+    Route::get('wisata-pantai/{id}', [App\Http\Controllers\ApiMobile\WisataController::class, 'dtl_pantai']);
+    Route::get('wisata-lembah/{id}', [App\Http\Controllers\ApiMobile\WisataController::class, 'dtl_lembah']);
+    // kategori kuliner
+    Route::get('wisata-kuliner', [App\Http\Controllers\ApiMobile\WisataController::class, 'kuliner']);
+    Route::get('wisata-kuliner/{id}', [App\Http\Controllers\ApiMobile\WisataController::class, 'dtl_kuliner']);
+    // kategori hiburan
     Route::get('wisata-hiburan', [App\Http\Controllers\ApiMobile\WisataController::class, 'index_hiburan']);
-    Route::get('wisata-hiburan/{id}', [App\Http\Controllers\ApiMobile\WisataController::class, 'dtl_hiburan']);
-    
+    Route::get('wisata-bioskop', [App\Http\Controllers\ApiMobile\WisataController::class, 'index_bioskop']);
+    Route::get('wisata-bermain', [App\Http\Controllers\ApiMobile\WisataController::class, 'index_bermain']);
+    Route::get('wisata-zoo', [App\Http\Controllers\ApiMobile\WisataController::class, 'index_zoo']);
+    // detail wisata hiburan
+    Route::get('wisata-bioskop/{id}', [App\Http\Controllers\ApiMobile\WisataController::class, 'dtl_bioskop']);
+    Route::get('wisata-bermain/{id}', [App\Http\Controllers\ApiMobile\WisataController::class, 'dtl_bermain']);
+    Route::get('wisata-zoo/{id}', [App\Http\Controllers\ApiMobile\WisataController::class, 'dtl_zoo']);
+    // kategori belanja
     Route::get('wisata-belanja', [App\Http\Controllers\ApiMobile\WisataController::class, 'index_belanja']);
     Route::get('wisata-belanja/{id}', [App\Http\Controllers\ApiMobile\WisataController::class, 'dtl_belanja']);
-    
+    // budaya
+    Route::get('budaya-lokal', [App\Http\Controllers\ApiMobile\BudayaController::class, 'index_lokal']);
+    Route::get('budaya-jejak', [App\Http\Controllers\ApiMobile\BudayaController::class, 'index_jejak']);
+    // dtl budaya
+    Route::get('budaya-lokal/{id}', [App\Http\Controllers\ApiMobile\BudayaController::class, 'dtl_lokal']);
+    Route::get('budaya-jejak/{id}', [App\Http\Controllers\ApiMobile\BudayaController::class, 'dtl_jejak']);
+
     Route::get('transportasi', [App\Http\Controllers\ApiMobile\TransportasiController::class, 'index']);
     Route::get('transportasi/{id}', [App\Http\Controllers\ApiMobile\TransportasiController::class, 'dtl']);
     

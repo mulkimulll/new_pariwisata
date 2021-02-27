@@ -30,13 +30,33 @@
                     <div class="form-group">
                         <label for="nama">Nama</label>
                         <div>
-                            <input type="text" class="form-control" name="nama_wisata" id="nama_wisata" placeholder="Nama Wisata">
+                            <input type="text" class="form-control" name="nama_wisata" id="nama_wisata" placeholder="Nama Resto">
                         </div>
                     </div>                    
                     <div class="form-group">
                         <label for="alamat">alamat</label>
                         <div>
                             <input type="text" class="form-control" name="alamat" id="alamat" placeholder="Alamat">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Jam buka</label>
+                                <div class="input-group clockpicker" data-placement="top" data-align="top" data-autoclose="true">
+                                  <input type="text" name="jam_buka" class="form-control">
+                                  <div class="input-group-append"> <span class="input-group-text"><i class="mdi mdi-clock"></i></span> </div>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Jam Tutup</label>
+                                <div class="input-group clockpicker" data-placement="top" data-align="top" data-autoclose="true">
+                                  <input type="text" name="jam_tutup" class="form-control">
+                                  <div class="input-group-append"> <span class="input-group-text"><i class="mdi mdi-clock"></i></span> </div>
+                                </div>
+                              </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -109,6 +129,14 @@
 
 @section('script')
 <script src="{{asset('vendors/dropify-master/dist/js/dropify.js')}}"></script>
+ <!-- form-pickers js -->
+ <script src="{{asset('admin/js/jquery.form-pickers.init.js')}}"></script>
+  <!-- plugin js -->
+ <script src="{{asset('admin/js/bootstrap-timepicker.js')}}"></script>
+ <script src="{{asset('admin/js/bootstrap-colorpicker.min.js')}}"></script>
+ <script src="{{asset('admin/js/bootstrap-clockpicker.min.js')}}"></script>
+ <script src="{{asset('admin/js/daterangepicker.js')}}"></script>
+  <script src="{{asset('admin/js/bootstrap-datepicker.min.js')}}"></script>
 <script>
     $(document).ready(function () {
         $('#example').DataTable();
@@ -129,7 +157,7 @@
         }
     });
 </script>
-<script type="text/javascript">
+{{-- <script type="text/javascript">
     $(document).ready(function () {
        $('#kategori').change(function () {
          var id = $(this).val();
@@ -160,7 +188,7 @@
          })
        });
     });
-</script>
+</script> --}}
 @endsection
 @section('css')
 <link href="{{asset('vendors/dropify-master/dist/css/dropify.css')}}" rel="stylesheet">

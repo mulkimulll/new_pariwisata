@@ -3,9 +3,9 @@
 <div class="col-md-4">
     <div class="card">
         <h4>
-            Ubah kuliner 
+            Ubah perbelanjaan 
         </h4>
-        <form class="forms-sample" method="POST" action="{{ url('/wisata-kuliner-update-proses/'.$r->id) }}" enctype="multipart/form-data" >
+        <form class="forms-sample" method="POST" action="{{ url('/wisata-belanja-update-proses/'.$r->id) }}" enctype="multipart/form-data" >
           @csrf
             <div class="form-group">
                 <label for="nama">Nama</label>

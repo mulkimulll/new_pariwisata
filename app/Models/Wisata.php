@@ -9,5 +9,5 @@ class Wisata extends Model
 {
     use HasFactory;
     protected $table = "wisata";
-    protected $fillable = ['nama_wisata','kategori','idsub','alamat','keterangan','gambar'];
+    protected $fillable = ['nama_wisata','kategori','idsub','alamat','keterangan','gambar','jam_buka','jam_tutup','harga'];
 }

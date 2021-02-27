@@ -136,6 +136,8 @@ class WisataController extends Controller
             $m->kategori = '2';
             $m->alamat = $data['alamat'];
             $m->ket = $data['keterangan'];
+            $m->jam_buka = $data['jam_buka'];
+            $m->jam_tutup = $data['jam_tutup'];
             if($request->hasfile('gambar')){
                 $files = $request->file('gambar');
                 $extension = $files->getClientOriginalExtension();
@@ -159,6 +161,9 @@ class WisataController extends Controller
             $m->kategori = '3';
             $m->idsub = $data['subkategori'];
             $m->alamat = $data['alamat'];
+            $m->jam_buka = $data['jam_buka'];
+            $m->jam_tutup = $data['jam_tutup'];
+            $m->harga = $data['harga'];
             $m->ket = $data['keterangan'];
             if($request->hasfile('gambar')){
                 $files = $request->file('gambar');
@@ -182,6 +187,8 @@ class WisataController extends Controller
             $m->nama_wisata = $data['nama_wisata'];
             $m->kategori = '4';
             $m->alamat = $data['alamat'];
+            $m->jam_buka = $data['jam_buka'];
+            $m->jam_tutup = $data['jam_tutup'];
             $m->ket = $data['keterangan'];
             if($request->hasfile('gambar')){
                 $files = $request->file('gambar');
@@ -377,7 +384,7 @@ class WisataController extends Controller
             wisata::where(['id'=>$id])->update(['nama_wisata'=>$data['nama_wisata'],
             'kategori'=>'4','alamat'=>$data['alamat'],
             'ket'=>$data['keterangan'],'gambar'=>$filename]);
-            return redirect('/wisata-belanja')->with('message','Wisata berhasil di update');
+            return redirect('/wisata-belanja')->with('message','Data berhasil di update');
         }
     }
     // end update proses

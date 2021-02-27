@@ -39,6 +39,26 @@
                             <input type="text" class="form-control" name="alamat" id="alamat" placeholder="Alamat">
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Jam buka</label>
+                                <div class="input-group clockpicker" data-placement="top" data-align="top" data-autoclose="true">
+                                  <input type="text" name="jam_buka" class="form-control">
+                                  <div class="input-group-append"> <span class="input-group-text"><i class="mdi mdi-clock"></i></span> </div>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Jam Tutup</label>
+                                <div class="input-group clockpicker" data-placement="top" data-align="top" data-autoclose="true">
+                                  <input type="text" name="jam_tutup" class="form-control">
+                                  <div class="input-group-append"> <span class="input-group-text"><i class="mdi mdi-clock"></i></span> </div>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="keterangan">Keterangan</label>
                         <div>
