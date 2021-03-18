@@ -50,10 +50,24 @@
                         <input type="text" class="form-control" name="trayek" id="trayek" placeholder="Taman Pajajaran – Bantar Kemang – Terminal Merdeka">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="jam_keberangkatan">Jam Keberangkatan</label>
-                    <div>
-                        <input type="text" class="form-control" name="jam_keberangkatan" id="jam_keberangkatan" placeholder="06:00; 07:00">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Jam berangkat</label>
+                            <div class="input-group clockpicker" data-placement="top" data-align="top" data-autoclose="true">
+                              <input type="text" name="jam_keberangkatan" class="form-control" placeholder="07:00">
+                              <div class="input-group-append"> <span class="input-group-text"><i class="mdi mdi-clock"></i></span> </div>
+                            </div>
+                          </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Jam tiba</label>
+                            <div class="input-group clockpicker" data-placement="top" data-align="top" data-autoclose="true">
+                              <input type="text" name="jam_tiba" class="form-control" placeholder="18:00">
+                              <div class="input-group-append"> <span class="input-group-text"><i class="mdi mdi-clock"></i></span> </div>
+                            </div>
+                          </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -127,6 +141,14 @@
 @endsection
 @section('script')
 <script src="{{asset('vendors/dropify-master/dist/js/dropify.js')}}"></script>
+<!-- form-pickers js -->
+<script src="{{asset('admin/js/jquery.form-pickers.init.js')}}"></script>
+<!-- plugin js -->
+<script src="{{asset('admin/js/bootstrap-timepicker.js')}}"></script>
+<script src="{{asset('admin/js/bootstrap-colorpicker.min.js')}}"></script>
+<script src="{{asset('admin/js/bootstrap-clockpicker.min.js')}}"></script>
+<script src="{{asset('admin/js/daterangepicker.js')}}"></script>
+<script src="{{asset('admin/js/bootstrap-datepicker.min.js')}}"></script>
 <script>
     $(document).ready(function () {
         $('#example').DataTable();

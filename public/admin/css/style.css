@@ -215,8 +215,8 @@ ul {
 }
 /** Sec Heading **/
 .sec-title {
-	padding-top: 20px;
-	padding-bottom: 15px;
+	padding-top: 1px;
+	padding-bottom: 1px;
 }
 .sec-title h2 {
 	color: #0442ba;

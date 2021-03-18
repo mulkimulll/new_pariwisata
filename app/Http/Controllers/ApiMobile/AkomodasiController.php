@@ -18,24 +18,43 @@ class AkomodasiController extends Controller
     use Helpers;
     public $successStatus = 200;
     
-    public function index()
+    public function index(Request $request)
     {
-        $r = DB::select("SELECT 
-                    id,nama, harga, ket, bintang_hotel
+        $search = $request->search;
+
+        if ($search == "" && $search == null) {
+            $w = DB::select("SELECT 
+                    id,nama, harga, ket, bintang_hotel,gambar
                 FROM
                     akomodasi");
 
-        return response()->json(['success' => $r], $this->successStatus);
+            return response()->json(['success' => $w], $this->successStatus);
+        } else {
+            $w = DB::select("SELECT 
+                    id,nama, harga, ket, bintang_hotel,gambar
+                FROM
+                    akomodasi WHERE nama LIKE ('{$search}%')");
+
+            return response()->json(['success' => $w], $this->successStatus);
+        }
     }
 
 
     public function dtl($id=null)
     {
-        $r = DB::select("SELECT 
-                    id,nama, harga, ket, bintang_hotel
+        $w = DB::select("SELECT 
+                    *
                 FROM
-                    akomodasi where id=?",[$id])[0];
+                    akomodasi 
+                WHERE
+                    id = ?",[$id])[0];
+
+        $idWisata = $w->id;
+
+        $queryGallery = DB::select("SELECT * FROM galeri where id = ?", [$idWisata]);
         
-        return response()->json(['success' => $r], $this->successStatus);
+        $obj_merge = (object) array_merge((array) $w, ['gallery' => $queryGallery]);
+        
+        return response()->json(['success' => $obj_merge], $this->successStatus);
     }
 }

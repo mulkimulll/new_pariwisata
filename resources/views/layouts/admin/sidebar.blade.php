@@ -37,16 +37,12 @@
         <li> <a href="{{ url('/info') }}" class=""> <i class="ti-info"></i> <span>Kelola Informasi</span></a> </li>
         <li> <a href="{{ url('/akomodasi') }}" class=""> <i class="ti-bag"></i> <span>Akomodasi</span></a> </li>
         <li> <a href="{{ url('/event') }}" class=""> <i class="ti-calendar"></i> <span>Event</span></a> </li>
-        {{-- <li class="menu_sub2"> <a href="#"> <i class="ti-user"></i> <span>Kelola Akun </span> <span
-            class="ti ti-angle-down styleicon"></span> </a>
-            <ul class="down_menu">
-                <li> <a href="{{ url('/akun') }}" class=""><span>Tambah Akun</span></a> </li>
-                <li> <a href="{{ url('/akun-list') }}">Daftar Akun</a> </li>
-            </ul>
-        </li> --}}
+        <li> <a href="{{ url('/admin-boking') }}" class=""> <i class="ti-calendar"></i> <span>Booking</span></a> </li>
+        {{-- <li> <a href="{{ url('/akun') }}" class=""> <i class="ti-user"></i> <span>Kelola Akun</span></a> </li> --}}
         @endrole
         @role('partner1')
-        <li> <a href="{{ url('/wisata-jelajah') }}"><span>Wisata jelajah</span></a> </li>
+        <li> <a href="{{ url('/wisata-jelajah') }}" class=""> <i class="ti-home"></i> <span>Wisata jelajah</span></a> </li>
+        <li> <a href="{{ url('/admin-boking') }}" class=""> <i class="ti-calendar"></i> <span>Booking</span></a> </li>
         @endrole
         @role('partner2')
         <li> <a href="{{ url('/wisata-kuliner') }}">Wisata kuliner</a> </li>

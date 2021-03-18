@@ -3,17 +3,6 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -25,6 +14,7 @@ Route::post('register', [App\Http\Controllers\ApiMobile\UserController::class, '
     Route::get('subkategori-hiburan', [App\Http\Controllers\ApiMobile\SubkategoriController::class, 'subkategori_hiburan']);
 
     Route::get('wisata-jelajah', [App\Http\Controllers\ApiMobile\WisataController::class, 'index_jelajah']);
+    Route::get('wisata-jelajah/{id}', [App\Http\Controllers\ApiMobile\WisataController::class, 'dtl_wisata_jelajah']);
     // kategori jelajah
     Route::get('wisata-pendakian', [App\Http\Controllers\ApiMobile\WisataController::class, 'index_pendakian']);
     Route::get('wisata-hutan', [App\Http\Controllers\ApiMobile\WisataController::class, 'index_hutan']);
@@ -40,6 +30,7 @@ Route::post('register', [App\Http\Controllers\ApiMobile\UserController::class, '
     Route::get('wisata-kuliner/{id}', [App\Http\Controllers\ApiMobile\WisataController::class, 'dtl_kuliner']);
     // kategori hiburan
     Route::get('wisata-hiburan', [App\Http\Controllers\ApiMobile\WisataController::class, 'index_hiburan']);
+    Route::get('wisata-hiburan/{id}', [App\Http\Controllers\ApiMobile\WisataController::class, 'dtl_hiburan']);
     Route::get('wisata-bioskop', [App\Http\Controllers\ApiMobile\WisataController::class, 'index_bioskop']);
     Route::get('wisata-bermain', [App\Http\Controllers\ApiMobile\WisataController::class, 'index_bermain']);
     Route::get('wisata-zoo', [App\Http\Controllers\ApiMobile\WisataController::class, 'index_zoo']);
@@ -51,11 +42,9 @@ Route::post('register', [App\Http\Controllers\ApiMobile\UserController::class, '
     Route::get('wisata-belanja', [App\Http\Controllers\ApiMobile\WisataController::class, 'index_belanja']);
     Route::get('wisata-belanja/{id}', [App\Http\Controllers\ApiMobile\WisataController::class, 'dtl_belanja']);
     // budaya
-    Route::get('budaya-lokal', [App\Http\Controllers\ApiMobile\BudayaController::class, 'index_lokal']);
-    Route::get('budaya-jejak', [App\Http\Controllers\ApiMobile\BudayaController::class, 'index_jejak']);
+    Route::get('budaya', [App\Http\Controllers\ApiMobile\BudayaController::class, 'index_budaya']);
     // dtl budaya
-    Route::get('budaya-lokal/{id}', [App\Http\Controllers\ApiMobile\BudayaController::class, 'dtl_lokal']);
-    Route::get('budaya-jejak/{id}', [App\Http\Controllers\ApiMobile\BudayaController::class, 'dtl_jejak']);
+    Route::get('budaya/{id}', [App\Http\Controllers\ApiMobile\BudayaController::class, 'dtl_budaya']);
 
     Route::get('transportasi', [App\Http\Controllers\ApiMobile\TransportasiController::class, 'index']);
     Route::get('transportasi/{id}', [App\Http\Controllers\ApiMobile\TransportasiController::class, 'dtl']);
@@ -67,6 +56,14 @@ Route::post('register', [App\Http\Controllers\ApiMobile\UserController::class, '
     Route::get('akomodasi/{id}', [App\Http\Controllers\ApiMobile\AkomodasiController::class, 'dtl']);
 
     Route::get('user/detail', [App\Http\Controllers\ApiMobile\UserController::class, 'details']);
+
+    // booking
+    Route::get('/get-booking-history/{id}', [App\Http\Controllers\ApiMobile\BokingController::class, 'history']);
+    Route::post('/booking/{id}', [App\Http\Controllers\ApiMobile\BokingController::class, 'index']);
+    Route::get('/get-notif/{id}', [App\Http\Controllers\ApiMobile\BokingController::class, 'notif']);
+
+    Route::post('/send-tokenid', [App\Http\Controllers\ApiMobile\UserController::class, 'send_tokenid']);
+
     Route::post('logout', [App\Http\Controllers\ApiMobile\UserController::class, 'logout']);
 
 

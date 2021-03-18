@@ -39,6 +39,12 @@
                             <input type="text" class="form-control" name="alamat" id="alamat" placeholder="Alamat">
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="harga">harga</label>
+                        <div>
+                            <input type="number" class="form-control" name="harga" id="harga" placeholder="harga">
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -129,14 +135,14 @@
 
 @section('script')
 <script src="{{asset('vendors/dropify-master/dist/js/dropify.js')}}"></script>
- <!-- form-pickers js -->
- <script src="{{asset('admin/js/jquery.form-pickers.init.js')}}"></script>
-  <!-- plugin js -->
- <script src="{{asset('admin/js/bootstrap-timepicker.js')}}"></script>
- <script src="{{asset('admin/js/bootstrap-colorpicker.min.js')}}"></script>
- <script src="{{asset('admin/js/bootstrap-clockpicker.min.js')}}"></script>
- <script src="{{asset('admin/js/daterangepicker.js')}}"></script>
-  <script src="{{asset('admin/js/bootstrap-datepicker.min.js')}}"></script>
+<!-- form-pickers js -->
+<script src="{{asset('admin/js/jquery.form-pickers.init.js')}}"></script>
+ <!-- plugin js -->
+<script src="{{asset('admin/js/bootstrap-timepicker.js')}}"></script>
+<script src="{{asset('admin/js/bootstrap-colorpicker.min.js')}}"></script>
+<script src="{{asset('admin/js/bootstrap-clockpicker.min.js')}}"></script>
+<script src="{{asset('admin/js/daterangepicker.js')}}"></script>
+<script src="{{asset('admin/js/bootstrap-datepicker.min.js')}}"></script>
 <script>
     $(document).ready(function () {
         $('#example').DataTable();
@@ -157,38 +163,6 @@
         }
     });
 </script>
-{{-- <script type="text/javascript">
-    $(document).ready(function () {
-       $('#kategori').change(function () {
-         var id = $(this).val();
-
-         $('#subkategori').find('option').not(':first').remove();
-
-         $.ajax({
-            url:'/kategori-dropdown/'+id,
-            type:'get',
-            dataType:'json',
-            success:function (response) {
-                var len = 0;
-                if (response.data != null) {
-                    len = response.data.length;
-                }
-
-                if (len>0) {
-                    for (var i = 0; i<len; i++) {
-                         var idsub = response.data[i].idsub;
-                         var namasub = response.data[i].namasub;
-
-                         var option = "<option value='"+idsub+"'>"+namasub+"</option>"; 
-
-                         $("#subkategori").append(option);
-                    }
-                }
-            }
-         })
-       });
-    });
-</script> --}}
 @endsection
 @section('css')
 <link href="{{asset('vendors/dropify-master/dist/css/dropify.css')}}" rel="stylesheet">

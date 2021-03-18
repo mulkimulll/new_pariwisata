@@ -27,6 +27,32 @@
                     <input type="text" class="form-control" name="alamat" id="alamat" value="{{ $r->alamat }}">
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Jam buka</label>
+                        <div class="input-group clockpicker" data-placement="top" data-align="top" data-autoclose="true">
+                          <input type="text" name="jam_buka" class="form-control" value="{{ $r->jam_buka}}">
+                          <div class="input-group-append"> <span class="input-group-text"><i class="mdi mdi-clock"></i></span> </div>
+                        </div>
+                      </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Jam Tutup</label>
+                        <div class="input-group clockpicker" data-placement="top" data-align="top" data-autoclose="true">
+                          <input type="text" name="jam_tutup" class="form-control" value="{{ $r->jam_tutup}}">
+                          <div class="input-group-append"> <span class="input-group-text"><i class="mdi mdi-clock"></i></span> </div>
+                        </div>
+                      </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="harga">harga</label>
+                <div>
+                    <input type="number" class="form-control" name="harga" id="harga" value="{{$r->harga}}">
+                </div>
+            </div>
             <div class="form-group">
                 <label for="keterangan">Keterangan</label>
                 <div>
@@ -36,7 +62,7 @@
             <div class="form-group">
                 <label>Gambar</label>
                 <div>
-                    <input type="file" name="gambar" class="dropify" data-default-file="{{ asset('/images/wisata/'.$r->gambar) }}" value="{{ $r->gambar }}" />
+                    <input type="file" name="gambar" class="dropify" data-default-file="{{ asset($r->gambar) }}" value="{{ $r->gambar }}" />
                 </div>
               </div>
             <button type="submit" class="btn btn-success mr-2">Simpan</button>

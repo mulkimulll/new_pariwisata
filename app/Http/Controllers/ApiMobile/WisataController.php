@@ -19,114 +19,77 @@ class WisataController extends Controller
     public $successStatus = 200;
     
     // kategori jelajah
-    public function index_jelajah()
+    public function index_jelajah(Request $request)
     {
-        $w = DB::select("SELECT 
-                        b.id AS idkategori,
-                        b.nama AS kategori,
-                        c.idsub,
-                        c.nama AS subkategori,
-                        a.id AS idwisata,
-                        nama_wisata
-                    FROM
-                        wisata a
-                            LEFT JOIN
-                        kategori b ON a.kategori = b.id
-                            LEFT JOIN
-                        subkategori c ON a.idsub = c.idsub
-                    WHERE
-                        b.id = 1");
-        return response()->json(['success' => $w], $this->successStatus);
+        $search = $request->search;
+
+        if ($search == "" && $search == null) {
+            $w = DB::select("SELECT wisata.nama_wisata, wisata.ket, wisata.gambar, wisata.id FROM wisata WHERE wisata.kategori = 1");
+
+            return response()->json(['success' => $w], $this->successStatus);
+        } else {
+            $w = DB::select("SELECT wisata.nama_wisata, wisata.ket, wisata.gambar, wisata.id FROM wisata WHERE wisata.kategori = 1 AND wisata.nama_wisata LIKE ('{$search}%')");
+
+            return response()->json(['success' => $w], $this->successStatus);
+        }
     }
     // list jelajah
-    public function index_pendakian()
+    public function index_pendakian(Request $request)
     {
-        $w = DB::select("SELECT 
-                        b.id AS idkategori,
-                        b.nama AS kategori,
-                        c.idsub,
-                        c.nama AS subkategori,
-                        a.id AS idwisata,
-                        nama_wisata,
-                        gambar,
-                        ket,
-                        lat,
-                        a.long
-                    FROM
-                        wisata a
-                            LEFT JOIN
-                        kategori b ON a.kategori = b.id
-                            LEFT JOIN
-                        subkategori c ON a.idsub = c.idsub
-                    where a.idsub=1 and a.kategori=1");
-        return response()->json(['success' => $w], $this->successStatus);
+        $search = $request->search;
+
+        if ($search == "" && $search == null) {
+            $w = DB::select("SELECT wisata.nama_wisata, wisata.ket, wisata.gambar, wisata.id FROM wisata WHERE wisata.kategori = 1 AND idsub=1");
+
+            return response()->json(['success' => $w], $this->successStatus);
+        } else {
+            $w = DB::select("SELECT wisata.nama_wisata, wisata.ket, wisata.gambar, wisata.id FROM wisata WHERE wisata.kategori = 1 AND idsub=1 AND wisata.nama_wisata LIKE ('{$search}%')");
+
+            return response()->json(['success' => $w], $this->successStatus);
+        }
     }
     
-    public function index_hutan()
+    public function index_hutan(Request $request)
     {
-        $w = DB::select("SELECT 
-                        b.id AS idkategori,
-                        b.nama AS kategori,
-                        c.idsub,
-                        c.nama AS subkategori,
-                        a.id AS idwisata,
-                        nama_wisata,
-                        gambar,
-                        ket,
-                        lat,
-                        a.long
-                    FROM
-                        wisata a
-                            LEFT JOIN
-                        kategori b ON a.kategori = b.id
-                            LEFT JOIN
-                        subkategori c ON a.idsub = c.idsub
-                    where a.idsub=6 and a.kategori=1");
-        return response()->json(['success' => $w], $this->successStatus);
+        $search = $request->search;
+
+        if ($search == "" && $search == null) {
+            $w = DB::select("SELECT wisata.nama_wisata, wisata.ket, wisata.gambar, wisata.id FROM wisata WHERE wisata.kategori = 1 AND idsub=6");
+
+            return response()->json(['success' => $w], $this->successStatus);
+        } else {
+            $w = DB::select("SELECT wisata.nama_wisata, wisata.ket, wisata.gambar, wisata.id FROM wisata WHERE wisata.kategori = 1 AND idsub=6 AND wisata.nama_wisata LIKE ('{$search}%')");
+
+            return response()->json(['success' => $w], $this->successStatus);
+        }
     }
-    public function index_pantai()
+    public function index_pantai(Request $request)
     {
-        $w = DB::select("SELECT 
-                        b.id AS idkategori,
-                        b.nama AS kategori,
-                        c.idsub,
-                        c.nama AS subkategori,
-                        a.id AS idwisata,
-                        nama_wisata,
-                        gambar,
-                        ket,
-                        lat,
-                        a.long
-                    FROM
-                        wisata a
-                            LEFT JOIN
-                        kategori b ON a.kategori = b.id
-                            LEFT JOIN
-                        subkategori c ON a.idsub = c.idsub
-                    where a.idsub=7 and a.kategori=1");
-        return response()->json(['success' => $w], $this->successStatus);
+        $search = $request->search;
+
+        if ($search == "" && $search == null) {
+            $w = DB::select("SELECT wisata.nama_wisata, wisata.ket, wisata.gambar, wisata.id FROM wisata WHERE wisata.kategori = 1 AND idsub=7");
+
+            return response()->json(['success' => $w], $this->successStatus);
+        } else {
+            $w = DB::select("SELECT wisata.nama_wisata, wisata.ket, wisata.gambar, wisata.id FROM wisata WHERE wisata.kategori = 1 AND idsub=7 AND wisata.nama_wisata LIKE ('{$search}%')");
+
+            return response()->json(['success' => $w], $this->successStatus);
+        }
     }
-    public function index_lembah()
+    public function index_lembah(Request $request)
     {
-        $w = DB::select("SELECT 
-                        b.id AS idkategori,
-                        b.nama AS kategori,
-                        c.idsub,
-                        c.nama AS subkategori,
-                        a.id AS idwisata,
-                        nama_wisata,
-                        gambar,
-                        ket,
-                        lat,
-                        a.long
-                    FROM
-                        wisata a
-                            LEFT JOIN
-                        kategori b ON a.kategori = b.id
-                            LEFT JOIN
-                        subkategori c ON a.idsub = c.idsub
-                    where a.idsub=8 and a.kategori=1");
-        return response()->json(['success' => $w], $this->successStatus);
+        $search = $request->search;
+
+        if ($search == "" && $search == null) {
+            $w = DB::select("SELECT wisata.nama_wisata, wisata.ket, wisata.gambar, wisata.id FROM wisata WHERE wisata.kategori = 1 AND idsub=8");
+
+            return response()->json(['success' => $w], $this->successStatus);
+        } else {
+            $w = DB::select("SELECT wisata.nama_wisata, wisata.ket, wisata.gambar, wisata.id FROM wisata WHERE wisata.kategori = 1 AND idsub=8 AND wisata.nama_wisata LIKE ('{$search}%')");
+
+            return response()->json(['success' => $w], $this->successStatus);
+        }
     }
     // end list jelajah
     // detail list jelajah
@@ -189,193 +152,235 @@ class WisataController extends Controller
                 a.idsub = 8 AND a.kategori = 1 and a.id=?",[$id])[0];
         return response()->json(['success' => $w], $this->successStatus);
     }
+    public function dtl_hiburan($id=null)
+    {
+        $w = DB::select("SELECT 
+                    *
+                FROM
+                    wisata 
+                WHERE
+                    id = ?",[$id])[0];
+
+        $idWisata = $w->id;
+
+        $queryGallery = DB::select("SELECT * FROM galeri where id_wisata = ?", [$idWisata]);
+        
+        $obj_merge = (object) array_merge((array) $w, ['gallery' => $queryGallery]);
+        
+        return response()->json(['success' => $obj_merge], $this->successStatus);
+    }
     // end detail list jelajah
 
     // kategori kuliner
-    public function kuliner()
+    public function kuliner(Request $request)
+    {
+        $search = $request->search;
+
+        if ($search == "" && $search == null) {
+            $w = DB::select("SELECT wisata.nama_wisata, wisata.ket, wisata.gambar, wisata.id FROM wisata WHERE wisata.kategori = 2");
+
+            return response()->json(['success' => $w], $this->successStatus);
+        } else {
+            $w = DB::select("SELECT wisata.nama_wisata, wisata.ket, wisata.gambar, wisata.id FROM wisata WHERE wisata.kategori = 2 AND wisata.nama_wisata LIKE ('{$search}%')");
+
+            return response()->json(['success' => $w], $this->successStatus);
+        }
+    }
+    
+    public function dtl_wisata_jelajah($id=null)
     {
         $w = DB::select("SELECT 
-                a.id, nama_wisata, ket, gambar, lat, a.long, jam_buka, jam_tutup
-            FROM
-                wisata a
-                    LEFT JOIN
-                kategori b ON a.kategori = b.id
-                    LEFT JOIN
-                subkategori c ON a.idsub = c.idsub
-            WHERE
-                a.kategori = 2");
-        return response()->json(['success' => $w], $this->successStatus);
+                    *
+                FROM
+                    wisata 
+                WHERE
+                    id = ?",[$id])[0];
+
+        $idWisata = $w->id;
+
+        $queryGallery = DB::select("SELECT * FROM galeri where id_wisata = ?", [$idWisata]);
+        
+        $obj_merge = (object) array_merge((array) $w, ['gallery' => $queryGallery]);
+        
+        return response()->json(['success' => $obj_merge], $this->successStatus);
     }
     
     public function dtl_kuliner($id=null)
     {
         $w = DB::select("SELECT 
-                a.id, nama_wisata, ket, gambar, jam_buka, jam_tutup, lat, a.long
-            FROM
-                wisata a
-                    LEFT JOIN
-                kategori b ON a.kategori = b.id
-                    LEFT JOIN
-                subkategori c ON a.idsub = c.idsub
-            WHERE
-                a.kategori = 2 and a.id=?",[$id])[0];
-        return response()->json(['success' => $w], $this->successStatus);
+                    *
+                FROM
+                    wisata 
+                WHERE
+                    id = ?",[$id])[0];
+
+        $idWisata = $w->id;
+
+        $queryGallery = DB::select("SELECT * FROM galeri where id_wisata = ?", [$idWisata]);
+        
+        $merge_wisata_gallery = (object) array_merge((array) $w, ['gallery' => $queryGallery]);
+    
+        $queryMenu = DB::select("SELECT * FROM menu_kuliner WHERE id_kuliner = ?", [$idWisata]);
+
+        $merge_wisata_kuliner = (object) array_merge((array) $merge_wisata_gallery, ['menu' => $queryMenu]);
+        
+        return response()->json(['success' => $merge_wisata_kuliner], $this->successStatus);
     }
 
     // kategori hiburan
-    public function index_hiburan()
+    public function index_hiburan(Request $request)
     {
-        $w = DB::select("SELECT 
-                        b.id AS idkategori,
-                        b.nama AS kategori,
-                        c.idsub,
-                        c.nama AS subkategori,
-                        a.id AS idwisata,
-                        nama_wisata, lat, a.long
-                    FROM
-                        wisata a
-                            LEFT JOIN
-                        kategori b ON a.kategori = b.id
-                            LEFT JOIN
-                        subkategori c ON a.idsub = c.idsub
-                    WHERE
-                        b.id = 3");
-        return response()->json(['success' => $w], $this->successStatus);
+        $search = $request->search;
+
+        if ($search == "" && $search == null) {
+            $w = DB::select("SELECT wisata.nama_wisata, wisata.ket, wisata.gambar, wisata.id FROM wisata WHERE wisata.kategori = 3");
+
+            return response()->json(['success' => $w], $this->successStatus);
+        } else {
+            $w = DB::select("SELECT wisata.nama_wisata, wisata.ket, wisata.gambar, wisata.id FROM wisata WHERE wisata.kategori = 3 AND wisata.nama_wisata LIKE ('{$search}%')");
+
+            return response()->json(['success' => $w], $this->successStatus);
+        }
     }
 
-    public function index_bioskop()
+    public function index_bioskop(Request $request)
     {
-        $w = DB::select("SELECT 
-                        b.id AS idkategori,
-                        b.nama AS kategori,
-                        c.idsub,
-                        c.nama AS subkategori,
-                        a.id AS idwisata,
-                        nama_wisata,
-                        gambar,
-                        ket, lat, a.long
-                    FROM
-                        wisata a
-                            LEFT JOIN
-                        kategori b ON a.kategori = b.id
-                            LEFT JOIN
-                        subkategori c ON a.idsub = c.idsub
-                    where a.idsub=9 and a.kategori=3");
-        return response()->json(['success' => $w], $this->successStatus);
+        $search = $request->search;
+
+        if ($search == "" && $search == null) {
+            $w = DB::select("SELECT wisata.nama_wisata, wisata.ket, wisata.gambar, wisata.id FROM wisata WHERE wisata.kategori = 3 AND idsub=9");
+
+            return response()->json(['success' => $w], $this->successStatus);
+        } else {
+            $w = DB::select("SELECT wisata.nama_wisata, wisata.ket, wisata.gambar, wisata.id FROM wisata WHERE wisata.kategori = 3 AND idsub=9 AND wisata.nama_wisata LIKE ('{$search}%')");
+
+            return response()->json(['success' => $w], $this->successStatus);
+        }
     }
     
-    public function index_bermain()
+    public function index_bermain(Request $request)
     {
-        $w = DB::select("SELECT 
-                        b.id AS idkategori,
-                        b.nama AS kategori,
-                        c.idsub,
-                        c.nama AS subkategori,
-                        a.id AS idwisata,
-                        nama_wisata,
-                        gambar,
-                        ket, lat, a.long
-                    FROM
-                        wisata a
-                            LEFT JOIN
-                        kategori b ON a.kategori = b.id
-                            LEFT JOIN
-                        subkategori c ON a.idsub = c.idsub
-                    where a.idsub=10 and a.kategori=3");
-        return response()->json(['success' => $w], $this->successStatus);
+        $search = $request->search;
+
+        if ($search == "" && $search == null) {
+            $w = DB::select("SELECT wisata.nama_wisata, wisata.ket, wisata.gambar, wisata.id FROM wisata WHERE wisata.kategori = 3 AND idsub=10");
+
+            return response()->json(['success' => $w], $this->successStatus);
+        } else {
+            $w = DB::select("SELECT wisata.nama_wisata, wisata.ket, wisata.gambar, wisata.id FROM wisata WHERE wisata.kategori = 3 AND idsub=10 AND wisata.nama_wisata LIKE ('{$search}%')");
+
+            return response()->json(['success' => $w], $this->successStatus);
+        }
     }
     
-    public function index_zoo()
+    public function index_zoo(Request $request)
     {
-        $w = DB::select("SELECT 
-                        b.id AS idkategori,
-                        b.nama AS kategori,
-                        c.idsub,
-                        c.nama AS subkategori,
-                        a.id AS idwisata,
-                        nama_wisata,
-                        gambar,
-                        ket, lat, a.long
-                    FROM
-                        wisata a
-                            LEFT JOIN
-                        kategori b ON a.kategori = b.id
-                            LEFT JOIN
-                        subkategori c ON a.idsub = c.idsub
-                    where a.idsub=11 and a.kategori=3");
-        return response()->json(['success' => $w], $this->successStatus);
+        $search = $request->search;
+
+        if ($search == "" && $search == null) {
+            $w = DB::select("SELECT wisata.nama_wisata, wisata.ket, wisata.gambar, wisata.id FROM wisata WHERE wisata.kategori = 3 AND idsub=11");
+
+            return response()->json(['success' => $w], $this->successStatus);
+        } else {
+            $w = DB::select("SELECT wisata.nama_wisata, wisata.ket, wisata.gambar, wisata.id FROM wisata WHERE wisata.kategori = 3 AND idsub=11 AND wisata.nama_wisata LIKE ('{$search}%')");
+
+            return response()->json(['success' => $w], $this->successStatus);
+        }
     }
 
     public function dtl_bioskop($id=null)
     {
         $w = DB::select("SELECT 
-                    a.id, nama_wisata, ket, gambar, jam_buka, jam_tutup, harga, lat, a.long
+                    *
                 FROM
-                    wisata a
-                        LEFT JOIN
-                    kategori b ON a.kategori = b.id
-                        LEFT JOIN
-                    subkategori c ON a.idsub = c.idsub
+                    wisata 
                 WHERE
-                    a.idsub = 9 AND a.kategori = 3 and a.id=?",[$id])[0];
-        return response()->json(['success' => $w], $this->successStatus);
+                    id = ?",[$id])[0];
+
+        $idWisata = $w->id;
+
+        $queryGallery = DB::select("SELECT * FROM galeri where id_wisata = ?", [$idWisata]);
+        
+        $obj_merge = (object) array_merge((array) $w, ['gallery' => $queryGallery]);
+        
+        return response()->json(['success' => $obj_merge], $this->successStatus);
     }
     public function dtl_bermain($id=null)
     {
         $w = DB::select("SELECT 
-                    a.id, nama_wisata, ket, gambar, jam_buka, jam_tutup, harga, lat, a.long
+                    *
                 FROM
-                    wisata a
-                        LEFT JOIN
-                    kategori b ON a.kategori = b.id
-                        LEFT JOIN
-                    subkategori c ON a.idsub = c.idsub
+                    wisata 
                 WHERE
-                    a.idsub = 10 AND a.kategori = 3 and a.id=?",[$id])[0];
-        return response()->json(['success' => $w], $this->successStatus);
+                    id = ?",[$id])[0];
+
+        $idWisata = $w->id;
+
+        $queryGallery = DB::select("SELECT * FROM galeri where id_wisata = ?", [$idWisata]);
+        
+        $obj_merge = (object) array_merge((array) $w, ['gallery' => $queryGallery]);
+        
+        return response()->json(['success' => $obj_merge], $this->successStatus);
     }
     public function dtl_zoo($id=null)
     {
         $w = DB::select("SELECT 
-                    a.id, nama_wisata, ket, gambar, jam_buka, jam_tutup, harga, lat, a.long
+                    *
                 FROM
-                    wisata a
-                        LEFT JOIN
-                    kategori b ON a.kategori = b.id
-                        LEFT JOIN
-                    subkategori c ON a.idsub = c.idsub
+                    wisata 
                 WHERE
-                    a.idsub = 11 AND a.kategori = 3 and a.id=?",[$id])[0];
-        return response()->json(['success' => $w], $this->successStatus);
+                    id = ?",[$id])[0];
+
+        $idWisata = $w->id;
+
+        $queryGallery = DB::select("SELECT * FROM galeri where id_wisata = ?", [$idWisata]);
+        
+        $obj_merge = (object) array_merge((array) $w, ['gallery' => $queryGallery]);
+        
+        return response()->json(['success' => $obj_merge], $this->successStatus);
     }
 
-    public function index_belanja()
+    public function index_belanja(Request $request)
     {
-        $w = DB::select("SELECT 
-                a.id, nama_wisata, ket, gambar, lat, a.long
-            FROM
-                wisata a
-                    LEFT JOIN
-                kategori b ON a.kategori = b.id
-                    LEFT JOIN
-                subkategori c ON a.idsub = c.idsub
-            WHERE
-                a.kategori = 4");
-        return response()->json(['success' => $w], $this->successStatus);
+        $search = $request->search;
+
+        if ($search == "" && $search == null) {
+            $w = DB::select("SELECT wisata.nama_wisata, wisata.ket, wisata.gambar, wisata.id FROM wisata WHERE wisata.kategori = 4");
+
+            return response()->json(['success' => $w], $this->successStatus);
+        } else {
+            $w = DB::select("SELECT wisata.nama_wisata, wisata.ket, wisata.gambar, wisata.id FROM wisata WHERE wisata.kategori = 4 AND wisata.nama_wisata LIKE ('{$search}%')");
+
+            return response()->json(['success' => $w], $this->successStatus);
+        }
     }
 
     public function dtl_belanja($id=null)
     {
         $w = DB::select("SELECT 
-                a.id, nama_wisata, ket, gambar, jam_buka, jam_tutup, lat, a.long
-            FROM
-                wisata a
-                    LEFT JOIN
-                kategori b ON a.kategori = b.id
-                    LEFT JOIN
-                subkategori c ON a.idsub = c.idsub
-            WHERE
-                a.kategori = 4 and a.id=?",[$id])[0];
-        return response()->json(['success' => $w], $this->successStatus);
+        id,
+        nama_wisata,
+        kategori,
+        alamat,
+        ket,
+        gambar,
+        jam_buka,
+        jam_tutup,
+        created_at,
+        updated_at,
+        lat,
+        a.long
+    FROM
+        wisata a
+    WHERE
+        id = ?",[$id])[0];
+
+        $idWisata = $w->id;
+
+        $queryGallery = DB::select("SELECT * FROM galeri where id_wisata = ?", [$idWisata]);
+        
+        $obj_merge = (object) array_merge((array) $w, ['gallery' => $queryGallery]);
+        
+        return response()->json(['success' => $obj_merge], $this->successStatus);
     }
 }

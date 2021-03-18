@@ -37,7 +37,7 @@ class AkomodasiController extends Controller
                 $large_image_path = 'images/akomodasi/'.$filename;
                 //image resize code
                 Image::make($files)->save($large_image_path);
-                $m->gambar = $filename;
+                $m->gambar = $large_image_path;
                }
             $m->save();
             return redirect('/akomodasi')->with('message','data berhasil di simpan');

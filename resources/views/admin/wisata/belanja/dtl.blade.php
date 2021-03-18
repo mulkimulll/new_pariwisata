@@ -20,7 +20,7 @@
                 <div class="row">
                   <div class="col-lg-12 col-xl-4">
                     <div class="my-js" id="aniimated-thumbnials-3" itemscope="">
-                      <img class="img-fluid rounded" src="{{asset('images/wisata/'.$r->gambar)}}" itemprop="thumbnail" alt="">
+                      <img class="img-fluid rounded" src="{{$r->gambar}}" itemprop="thumbnail" alt="">
                     </div>
                     {{-- <div class="like-comment mt-4 like-comment-sm-mb">
                       <ul class="list-inline">
@@ -34,7 +34,7 @@
                     </div> --}}
                   </div>
                   <div class="col-xl-6">
-                    <p>Informasi / Keterangan :<br><br> {{ $r->ket }}</p>
+                    <p>Informasi / Keterangan :<br><br> {!! $r->ket  !!}</p>
                     <a href="{{ url('/wisata-belanja') }}"><button type="button" class="btn btn-secondary"><i class="ti-back-left mr-2"></i> Kembali</button></a>
                   </div>
                 </div>

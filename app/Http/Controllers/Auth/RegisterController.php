@@ -29,7 +29,26 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
+    // protected $redirectTo = '/';
+    protected function authenticated(Request $request, $user)
+    {
+        if ( $user->isAdmin() ) {
+
+            return redirect()->route('dashboard');
+        } elseif ($user->isPartner1()) {
+
+            return redirect()->route('dashboard');
+        } elseif ($user->isPartner2()) {
+
+            return redirect()->route('dashboard');
+        } elseif ($user->isPartner3()) {
+
+            return redirect()->route('dashboard');
+        } 
+
+
+        return redirect('/');
+    }
 
     /**
      * Create a new controller instance.

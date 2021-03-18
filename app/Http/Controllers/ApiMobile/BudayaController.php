@@ -19,87 +19,23 @@ class BudayaController extends Controller
     use Helpers;
     public $successStatus = 200;
 
-    public function index_lokal()
+    public function index_budaya()
     {
-        $w = DB::select("SELECT 
-        a.id,
-        a.nama,
-        b.nama AS namakategori,
-        c.nama AS namasub,
-        gambar
-    FROM
-        budaya a
-            LEFT JOIN
-        kategori b ON a.idkategori = b.id
-            LEFT JOIN
-        subkategori c ON a.idsub = c.idsub
-    WHERE
-        a.idkategori = 15 AND a.idsub = 14");
-        return response()->json(['success' => $w], $this->successStatus);
+        $w = DB::select("SELECT id, nama, gambar FROM budaya where idkategori = 5");
+        
+        $j = DB::select("SELECT id, nama, gambar FROM budaya where idkategori = 6");
+        
+        $obj_merge = (object) array_merge(['kearifan_lokal' => $w], ['jejak' => $j]);
+
+        return response()->json(['success' => $obj_merge], $this->successStatus);
     }
     
-    public function index_jejak()
-    {
-        $w = DB::select("SELECT 
-        a.id,
-        a.nama,
-        b.nama AS namakategori,
-        c.nama AS namasub,
-        gambar
-    FROM
-        budaya a
-            LEFT JOIN
-        kategori b ON a.idkategori = b.id
-            LEFT JOIN
-        subkategori c ON a.idsub = c.idsub
-    WHERE
-        a.idkategori = 15 AND a.idsub = 15");
-        return response()->json(['success' => $w], $this->successStatus);
-    }
 
-    public function dtl_lokal($id=null)
+    public function dtl_budaya($id=null)
     {
-        $r = DB::select("SELECT 
-                        a.id,
-                        a.nama,
-                        b.nama AS namakategori,
-                        c.nama AS namasub,
-                        gambar,
-                        deskripsi
-                    FROM
-                        budaya a
-                            LEFT JOIN
-                        kategori b ON a.idkategori = b.id
-                            LEFT JOIN
-                        subkategori c ON a.idsub = c.idsub
-                    WHERE
-                        a.idkategori = 15 AND a.idsub = 14
-                            AND a.id = ?",[$id])[0];
+        $r = DB::select("SELECT id, nama, gambar, deskripsi FROM budaya where id=?",[$id])[0];
         
         return response()->json(['success' => $r], $this->successStatus);
     }
-    
-    public function dtl_jejak($id=null)
-    {
-        $r = DB::select("SELECT 
-                    a.id,
-                    a.nama,
-                    b.nama AS namakategori,
-                    c.nama AS namasub,
-                    gambar,
-                    deskripsi
-                FROM
-                    budaya a
-                        LEFT JOIN
-                    kategori b ON a.idkategori = b.id
-                        LEFT JOIN
-                    subkategori c ON a.idsub = c.idsub
-                WHERE
-                    a.idkategori = 15 AND a.idsub = 15
-                        AND a.id = ?",[$id])[0];
-        
-        return response()->json(['success' => $r], $this->successStatus);
-    }
-
     
 }

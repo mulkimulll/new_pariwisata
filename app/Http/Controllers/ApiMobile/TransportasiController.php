@@ -48,7 +48,7 @@ class TransportasiController extends Controller
                 $large_image_path = 'images/transportasi/'.$filename;
                 //image resize code
                 Image::make($files)->save($large_image_path);
-                $m->gambar = $filename;
+                $m->gambar = $large_image_path;
                }
             $m->save();
             return redirect('/transportasi')->with('message','Data berhasil di simpan');

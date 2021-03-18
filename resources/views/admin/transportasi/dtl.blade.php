@@ -20,7 +20,7 @@
             <div class="row">
               <div class="col-lg-12 col-xl-4">
                 <div class="my-js" id="aniimated-thumbnials-3" itemscope="">
-                  <img class="img-fluid rounded" src="{{asset('images/transportasi/'.$r->gambar)}}" itemprop="thumbnail" alt="">
+                  <img class="img-fluid rounded" src="{{$r->gambar}}" itemprop="thumbnail" alt="">
                 </div>
                 {{-- <div class="like-comment mt-4 like-comment-sm-mb">
                   <ul class="list-inline">

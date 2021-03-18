@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Wisata;
+use App\Models\Galeri;
+use Carbon\Carbon;
 use DB;
-use Input;
+use Illuminate\Support\Facades\Input;
 use Image;
 
 class WisataController extends Controller
@@ -104,7 +106,7 @@ class WisataController extends Controller
 
     // create
     public function create_jelajah(Request $request)
-    {
+    {   
         if($request->isMethod('post')){
             $data = $request->all();
             $m = new wisata;
@@ -113,6 +115,9 @@ class WisataController extends Controller
             $m->idsub = $data['subkategori'];
             $m->alamat = $data['alamat'];
             $m->ket = $data['keterangan'];
+            $m->jam_buka = $data['jam_buka'];
+            $m->jam_tutup = $data['jam_tutup'];
+            $m->harga = $data['harga'];
             if($request->hasfile('gambar')){
                 $files = $request->file('gambar');
                 $extension = $files->getClientOriginalExtension();
@@ -120,9 +125,10 @@ class WisataController extends Controller
                 $large_image_path = 'images/wisata/'.$filename;
                 //image resize code
                 Image::make($files)->save($large_image_path);
-                $m->gambar = $filename;
+                $m->gambar = $large_image_path;
                }
             $m->save();
+            // dd($data);
             return redirect('/wisata-jelajah')->with('message','Wisata berhasil di simpan');
          }
     }
@@ -145,7 +151,7 @@ class WisataController extends Controller
                 $large_image_path = 'images/wisata/'.$filename;
                 //image resize code
                 Image::make($files)->save($large_image_path);
-                $m->gambar = $filename;
+                $m->gambar = $large_image_path;
                }
             $m->save();
             return redirect('/wisata-kuliner')->with('message','Wisata berhasil di simpan');
@@ -172,7 +178,7 @@ class WisataController extends Controller
                 $large_image_path = 'images/wisata/'.$filename;
                 //image resize code
                 Image::make($files)->save($large_image_path);
-                $m->gambar = $filename;
+                $m->gambar = $large_image_path;
                }
             $m->save();
             return redirect('/wisata-hiburan')->with('message','Wisata berhasil di simpan');
@@ -197,11 +203,38 @@ class WisataController extends Controller
                 $large_image_path = 'images/wisata/'.$filename;
                 //image resize code
                 Image::make($files)->save($large_image_path);
-                $m->gambar = $filename;
+                $m->gambar = $large_image_path;
                }
             $m->save();
             return redirect('/wisata-belanja')->with('message','Wisata berhasil di simpan');
          }
+    }
+
+    public function index_galeri()
+    {
+        $r = DB::SELECT("SELECT * FROM wisata");
+        return view('admin.galeri.index',compact('r'));
+    }
+
+    public function create_galeri(Request $request, $id=null)
+    {
+        if ($request->hasfile('nama')) {
+            $data = $request->all();
+            $images = $request->file('nama');
+
+            foreach($images as $image) {
+                $name = $image->getClientOriginalName();
+                $path = $image->storeAs('uploads', $name, 'public');
+
+                galeri::create([
+                    'nama' => $name,
+                    'id_wisata' => $data['wisata'],
+                    'path' => '/storage/'.$path
+                  ]);
+            }
+         }
+
+        return back()->with('success', 'galeri berhasil disimpan');
     }
     // end create
 
@@ -221,22 +254,25 @@ class WisataController extends Controller
     public function dtl_jelajah($id=null)
     {
         $r = DB::select("SELECT * FROM wisata where id=?",[$id])[0];
+        $g = DB::select("SELECT * from galeri where id_wisata=?",[$id]);
         
-        return view('admin.wisata.jelajah.dtl',compact('r'));
+        return view('admin.wisata.jelajah.dtl',compact('r','g'));
     }
     
     public function dtl_kuliner($id=null)
     {
         $r = DB::select("SELECT * FROM wisata where id=?",[$id])[0];
+        $g = DB::select("SELECT * from galeri where id_wisata=?",[$id]);
         
-        return view('admin.wisata.kuliner.dtl',compact('r'));
+        return view('admin.wisata.kuliner.dtl',compact('r','g'));
     }
     
     public function dtl_hiburan($id=null)
     {
         $r = DB::select("SELECT * FROM wisata where id=?",[$id])[0];
+        $g = DB::select("SELECT * from galeri where id_wisata=?",[$id]);
         
-        return view('admin.wisata.hiburan.dtl',compact('r'));
+        return view('admin.wisata.hiburan.dtl',compact('r','g'));
     }
     
     public function dtl_belanja($id=null)
@@ -298,13 +334,13 @@ class WisataController extends Controller
             else {
                 $file       = $request->file('gambar');
                 $filename   = $file->getClientOriginalName();
-                $request->file('gambar')->move("images/wisata", $filename);
+                $large_image_path = 'images/wisata/'.$filename;
                 $update->gambar = $filename;
             }
-            $filename = $update->gambar; 
+            $filename = $large_image_path; 
            
             wisata::where(['id'=>$id])->update(['nama_wisata'=>$data['nama_wisata'],
-            'kategori'=>'1','idsub'=>$data['subkategori'],'alamat'=>$data['alamat'],
+            'kategori'=>'1','idsub'=>$data['subkategori'],'alamat'=>$data['alamat'],'harga'=>$data['harga'],'jam_buka'=>$data['jam_buka'],'jam_tutup'=>$data['jam_tutup'],
             'ket'=>$data['keterangan'],'gambar'=>$filename]);
             return redirect('/wisata-jelajah')->with('message','Wisata berhasil di update');
         }
@@ -324,13 +360,13 @@ class WisataController extends Controller
             else {
                 $file       = $request->file('gambar');
                 $filename   = $file->getClientOriginalName();
-                $request->file('gambar')->move("images/wisata", $filename);
+                $large_image_path = 'images/wisata/'.$filename;
                 $update->gambar = $filename;
             }
-            $filename = $update->gambar; 
+            $filename = $large_image_path; 
            
             wisata::where(['id'=>$id])->update(['nama_wisata'=>$data['nama_wisata'],
-            'kategori'=>'2','alamat'=>$data['alamat'],
+            'kategori'=>'2','alamat'=>$data['alamat'],'jam_buka'=>$data['jam_buka'],'jam_tutup'=>$data['jam_tutup'],
             'ket'=>$data['keterangan'],'gambar'=>$filename]);
             return redirect('/wisata-kuliner')->with('message','Wisata berhasil di update');
         }
@@ -350,13 +386,13 @@ class WisataController extends Controller
             else {
                 $file       = $request->file('gambar');
                 $filename   = $file->getClientOriginalName();
-                $request->file('gambar')->move("images/wisata", $filename);
+                $large_image_path = 'images/wisata/'.$filename;
                 $update->gambar = $filename;
             }
-            $filename = $update->gambar; 
+            $filename = $large_image_path; 
            
             wisata::where(['id'=>$id])->update(['nama_wisata'=>$data['nama_wisata'],
-            'kategori'=>'3','idsub'=>$data['subkategori'],'alamat'=>$data['alamat'],
+            'kategori'=>'3','idsub'=>$data['subkategori'],'alamat'=>$data['alamat'],'jam_buka'=>$data['jam_buka'],'jam_tutup'=>$data['jam_tutup'],'harga'=>$data['harga'],
             'ket'=>$data['keterangan'],'gambar'=>$filename]);
             return redirect('/wisata-hiburan')->with('message','Wisata berhasil di update');
         }
@@ -376,13 +412,13 @@ class WisataController extends Controller
             else {
                 $file       = $request->file('gambar');
                 $filename   = $file->getClientOriginalName();
-                $request->file('gambar')->move("images/wisata", $filename);
+                $large_image_path = 'images/wisata/'.$filename;
                 $update->gambar = $filename;
             }
-            $filename = $update->gambar; 
+            $filename = $large_image_path; 
            
             wisata::where(['id'=>$id])->update(['nama_wisata'=>$data['nama_wisata'],
-            'kategori'=>'4','alamat'=>$data['alamat'],
+            'kategori'=>'4','alamat'=>$data['alamat'],'jam_buka'=>$data['jam_buka'],'jam_tutup'=>$data['jam_tutup'],
             'ket'=>$data['keterangan'],'gambar'=>$filename]);
             return redirect('/wisata-belanja')->with('message','Data berhasil di update');
         }

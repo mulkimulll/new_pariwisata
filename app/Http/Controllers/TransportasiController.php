@@ -35,6 +35,7 @@ class TransportasiController extends Controller
             $m->biaya = $data['biaya'];
             $m->trayek = $data['trayek'];
             $m->jam_keberangkatan = $data['jam_keberangkatan'];
+            $m->jam_tiba = $data['jam_tiba'];
             $m->keterangan = $data['keterangan'];
             if($request->hasfile('gambar')){
                 $files = $request->file('gambar');
@@ -43,7 +44,7 @@ class TransportasiController extends Controller
                 $large_image_path = 'images/transportasi/'.$filename;
                 //image resize code
                 Image::make($files)->save($large_image_path);
-                $m->gambar = $filename;
+                $m->gambar = $large_image_path;
                }
             $m->save();
             return redirect('/transportasi')->with('message','Data berhasil di simpan');

@@ -87,16 +87,20 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/create-akomodasi', [App\Http\Controllers\AkomodasiController::class, 'create'])->name('create-akomodasi');
 
     Route::get('/event', [App\Http\Controllers\EventController::class, 'index'])->name('event');
-    // Route::get('/akomodasi-dtl/{id}', [App\Http\Controllers\AkomodasiController::class, 'dtl']);
-    // Route::get('/akomodasi-updt/{id}', [App\Http\Controllers\AkomodasiController::class, 'update']);
     Route::get('/event-del/{id}', [App\Http\Controllers\EventController::class, 'destroy']);
-    // Route::post('/akomodasi-update-proses/{id}', [App\Http\Controllers\AkomodasiController::class, 'updateproses']);
     Route::post('/create-event', [App\Http\Controllers\EventController::class, 'create'])->name('createE');
-    // Route::get('/event-ayo', [App\Http\Controllers\EventController::class, 'index_user']);
 
     Route::get("auto-complete",  [App\Http\Controllers\GoogleController::class, 'index']);
 
+    Route::get('/galeri', [App\Http\Controllers\WisataController::class, 'index_galeri'])->name('galeri');
+    Route::post('/create-galeri', [App\Http\Controllers\WisataController::class, 'create_galeri'])->name('create_galeri');
+
     Route::get('/akun', [App\Http\Controllers\AkunController::class, 'index'])->name('akun');
+    Route::post('/create-akun', [App\Http\Controllers\AkunController::class, 'create'])->name('createakun');
+
+    Route::get('/admin-boking', [App\Http\Controllers\BokingController::class, 'index'])->name('boking-admin');
+    Route::get('/admin-booking-approve/{id}', [App\Http\Controllers\BokingController::class, 'approve'])->name('boking-approve');
+    Route::get('/admin-booking-reject/{id}', [App\Http\Controllers\BokingController::class, 'reject'])->name('boking-reject');
 });
 
 // frontend
@@ -112,9 +116,38 @@ Route::get('/bogor-pendakian', [App\Http\Controllers\WisatabogorController::clas
 Route::get('/bogor-pendakian/{id}', [App\Http\Controllers\WisatabogorController::class, 'dtl_pendakian']);
 Route::get('/boking-pendakian/{id}', [App\Http\Controllers\WisatabogorController::class, 'booking_pendakian']);
 
+Route::get('/bogor-hutan', [App\Http\Controllers\WisatabogorController::class, 'index_hutan'])->name('bogor-hutan');
+Route::get('/bogor-hutan/{id}', [App\Http\Controllers\WisatabogorController::class, 'dtl_hutan']);
+Route::get('/boking-hutan/{id}', [App\Http\Controllers\WisatabogorController::class, 'booking_hutan']);
+
+Route::get('/bogor-pantai', [App\Http\Controllers\WisatabogorController::class, 'index_pantai'])->name('bogor-pantai');
+Route::get('/bogor-pantai/{id}', [App\Http\Controllers\WisatabogorController::class, 'dtl_pantai']);
+Route::get('/boking-pantai/{id}', [App\Http\Controllers\WisatabogorController::class, 'booking_pantai']);
+
+Route::get('/bogor-lembah', [App\Http\Controllers\WisatabogorController::class, 'index_lembah'])->name('bogor-lembah');
+Route::get('/bogor-lembah/{id}', [App\Http\Controllers\WisatabogorController::class, 'dtl_lembah']);
+Route::get('/boking-lembah/{id}', [App\Http\Controllers\WisatabogorController::class, 'booking_lembah']);
+
+Route::get('/bogor-bioskop', [App\Http\Controllers\WisatabogorController::class, 'index_bioskop'])->name('bogor-bioskop');
+Route::get('/bogor-bioskop/{id}', [App\Http\Controllers\WisatabogorController::class, 'dtl_bioskop']);
+Route::get('/boking-bioskop/{id}', [App\Http\Controllers\WisatabogorController::class, 'booking_bioskop']);
+
+Route::get('/bogor-bermain', [App\Http\Controllers\WisatabogorController::class, 'index_bermain'])->name('bogor-bermain');
+Route::get('/bogor-bermain/{id}', [App\Http\Controllers\WisatabogorController::class, 'dtl_bermain']);
+Route::get('/boking-bermain/{id}', [App\Http\Controllers\WisatabogorController::class, 'booking_bermain']);
+
+Route::get('/bogor-zoo', [App\Http\Controllers\WisatabogorController::class, 'index_zoo'])->name('bogor-zoo');
+Route::get('/bogor-zoo/{id}', [App\Http\Controllers\WisatabogorController::class, 'dtl_zoo']);
+Route::get('/boking-zoo/{id}', [App\Http\Controllers\WisatabogorController::class, 'booking_zoo']);
+
 Route::get('/bogor-event', [App\Http\Controllers\EventController::class, 'index_event'])->name('bogor-event');
+Route::get('/bogor-event/{id}', [App\Http\Controllers\EventController::class, 'dtl_event'])->name('bogor-dtl-event');
+
+// Route::get('/register-partner', [App\Http\Controllers\RegisterPartnerController::class, 'index'])->name('register-partner');
+
+
 
 Route::middleware(['auth'])->group(function () {
-    Route::post('/cekboking', [App\Http\Controllers\WisatabogorController::class, 'boking_jelajah'])->name('cekboking');
+    Route::post('/cekboking', [App\Http\Controllers\WisatabogorController::class, 'boking_jelajah'])->name('boking-jelajah');
     
 });

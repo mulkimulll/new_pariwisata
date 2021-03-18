@@ -20,6 +20,12 @@
                         <textarea id="summernote" name="isi"></textarea>
                     </div>
                 </div>
+                <div class="form-group">
+                  <label>Gambar</label>
+                  <div>
+                      <input type="file" name="gambar" class="dropify" data-allowed-file-extensions="jpg png"/>
+                  </div>
+                </div>
                 <button type="submit" class="btn btn-primary mr-2">Simpan</button>
                 <button type="reset" class="btn btn-danger mr-2">Batal</button>
             </form>
@@ -94,7 +100,7 @@
 </div>
 @endsection
 @section('script')
-    
+<script src="{{asset('vendors/dropify-master/dist/js/dropify.js')}}"></script>
 <script>
     jQuery(document).ready(function ($) {
         $('#demo-foo-pagination').DataTable();
@@ -102,10 +108,21 @@
 
 </script>
 <script>
-    $('#summernote').summernote({
-      placeholder: 'Isi Keterangan',
-      tabsize: 10,
-      height: 100
+  $('#summernote').summernote({
+    placeholder: 'Isi Keterangan',
+    tabsize: 10,
+    height: 100
+  });
+  $('.dropify').dropify({
+        messages: {
+            'default': 'Drag and drop a file here or click',
+            'replace': 'Drag and drop or click to replace',
+            'remove':  'Remove',
+            'error':   'Ooops, something wrong happended.'
+        }
     });
-  </script>
+</script>
+@endsection
+@section('css')
+<link href="{{asset('vendors/dropify-master/dist/css/dropify.css')}}" rel="stylesheet">
 @endsection

@@ -34,7 +34,7 @@ class BudayaController extends Controller
                 $large_image_path = 'images/budaya/'.$filename;
                 //image resize code
                 Image::make($files)->save($large_image_path);
-                $m->gambar = $filename;
+                $m->gambar = $large_image_path;
                }
             $m->save();
             return redirect('/budaya')->with('message','data berhasil di simpan');
@@ -71,10 +71,10 @@ class BudayaController extends Controller
             else {
                 $file       = $request->file('gambar');
                 $filename   = $file->getClientOriginalName();
-                $request->file('gambar')->move("images/budaya", $filename);
+                $large_image_path = 'images/budaya/'.$filename;
                 $update->gambar = $filename;
             }
-            $filename = $update->gambar; 
+            $filename = $large_image_path; 
            
             budaya::where(['id'=>$id])->update(['nama'=>$data['nama'],
             'alamat'=>$data['alamat'],'telp'=>$data['telp'],'bintang_hotel'=>$data['bintang_hotel'],

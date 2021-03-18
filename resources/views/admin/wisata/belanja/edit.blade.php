@@ -20,6 +20,12 @@
                 </div>
             </div>
             <div class="form-group">
+                <label for="harga">harga</label>
+                <div>
+                    <input type="number" class="form-control" name="harga" id="harga" value="{{$r->harga}}">
+                </div>
+            </div>
+            <div class="form-group">
                 <label for="keterangan">Keterangan</label>
                 <div>
                     <textarea id="summernote" name="keterangan">{{ $r->ket }}</textarea>
