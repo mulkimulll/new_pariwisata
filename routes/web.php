@@ -151,3 +151,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/cekboking', [App\Http\Controllers\WisatabogorController::class, 'boking_jelajah'])->name('boking-jelajah');
     
 });
+
+// membuat Route untuk SSO
+Route::get('auth/facebook', [SocialController::class, 'facebookRedirect']);
+Route::get('auth/facebook/callback', [SocialController::class, 'loginWithFacebook']);
+
+Route::get('auth/google', [SocialController::class, 'redirectToGoogle']);
+Route::get('auth/google/callback', [SocialController::class, 'handleGoogleCallback']);
