@@ -13,8 +13,6 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasApiTokens;
     use HasRoleAndPermission;
-    use TwoFactorAuthenticatable;
-    use HasProfilePhoto;
     /**
      * The attributes that are mass assignable.
      *
@@ -24,8 +22,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'google_id',
         'fb_id',
+        'google_id',
     ];
 
     /**

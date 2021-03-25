@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SocialController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -153,8 +154,8 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // membuat Route untuk SSO
-Route::get('auth/facebook', [SocialController::class, 'facebookRedirect']);
-Route::get('auth/facebook/callback', [SocialController::class, 'loginWithFacebook']);
+Route::get('auth/facebook', [App\Http\Controllers\Auth\LoginController::class, 'facebookRedirect']);
+Route::get('auth/facebook/callback', [App\Http\Controllers\Auth\LoginController::class, 'loginWithFacebook']);
 
-Route::get('auth/google', [SocialController::class, 'redirectToGoogle']);
-Route::get('auth/google/callback', [SocialController::class, 'handleGoogleCallback']);
+Route::get('auth/google', [App\Http\Controllers\Auth\LoginController::class, 'redirectToGoogle']);
+Route::get('auth/google/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleGoogleCallback']);

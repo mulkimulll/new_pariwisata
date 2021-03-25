@@ -6,7 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-
+use App\Models\User;
+use Validator;
+use Socialite;
+use Exception;
+use Auth;
 class LoginController extends Controller
 {
     /*
@@ -57,4 +61,57 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+
+    // Login Google SSO
+    public function redirectToGoogle()
+
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function handleGoogleCallback()
+
+    {
+        $user = Socialite::driver('google')->user();
+
+        $this->_registerOrLoginUser($user);
+
+        // Return ke home setelah melakukan login
+        return redirect('/');
+    }
+
+
+
+    // Login Facebook SSO
+    public function facebookRedirect()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    public function loginWithFacebook()
+    
+    {
+        $user = Socialite::driver('facebook')->user();
+
+        $this->_registerOrLoginUser($user);
+
+        // Return ke home setelah melakukan login
+        return redirect('/');
+    }
+
+    protected function _registerOrLoginUser($data)
+    {
+        $user = User::where('email','=', $data->email)->first();
+        if(!$user) {
+            $user = new User();
+            $user->name = $data->name;
+            $user->email = $data->email;
+            $user->provider_id = $data->id;
+            $user->save();
+        }
+
+        Auth::login($user);
+    }
+
 }
