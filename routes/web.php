@@ -13,6 +13,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('/dtl-profile', [App\Http\Controllers\ProfileController::class, 'index']);
     
     Route::get('/kategori', [App\Http\Controllers\KategoriController::class, 'index'])->name('kategori');
     Route::get('/kategori-ubah/{id}', [App\Http\Controllers\KategoriController::class, 'edit'])->name('ubahK');

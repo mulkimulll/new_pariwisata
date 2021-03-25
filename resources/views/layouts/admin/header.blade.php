@@ -33,8 +33,8 @@
                           </form>
                       </div>
                       <li> 
-                      <a class="dropdown-item" href="#">
-                           {{ __('Profile') }}
+                      <a class="dropdown-item" href="{{url('/dtl-profile')}}">
+                           Profile
                        </a>
                       </li>
                         <li> <a class="dropdown-item" href="{{ route('logout') }}"
