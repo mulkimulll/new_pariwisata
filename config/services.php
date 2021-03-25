@@ -30,4 +30,20 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+
+
+    // untuk menarik id client 
+    'google' => [
+
+        'client_id' => '1008059115798-0pimpmlmaj2rhp64c7m6o3arukfqe031.apps.googleusercontent.com',
+        'client_secret' => 'ICcCmLiBSwC0UtsRt04ZNdZi',
+        'redirect' => 'http://localhost:8000/auth/google/callback',
+    ],
+
+    'facebook' => [
+        'client_id' => '260225068814695',
+        'client_secret' => '4f2b977ee8ad9afcb2cace66743d3351',
+        'redirect' => 'http://localhost:8000/auth/facebook/callback',
+    ],
+
 ];
