@@ -37,13 +37,13 @@ return [
 
         'client_id' => '1008059115798-0pimpmlmaj2rhp64c7m6o3arukfqe031.apps.googleusercontent.com',
         'client_secret' => 'ICcCmLiBSwC0UtsRt04ZNdZi',
-        'redirect' => 'http://localhost:8000/auth/google/callback',
+        'redirect' => 'http://localhost:8000/auth/google/callback', //ubah localhost:8000 sesuai dengan nama domain jika sudah dimasukkan ke server dan ubah di credential google
     ],
 
     'facebook' => [
         'client_id' => '260225068814695',
         'client_secret' => '4f2b977ee8ad9afcb2cace66743d3351',
-        'redirect' => 'http://localhost:8000/auth/facebook/callback',
+        'redirect' => 'http://localhost:8000/auth/facebook/callback', //ubah localhost:8000 sesuai dengan nama domain jika sudah dimasukkan ke server
     ],
 
 ];
